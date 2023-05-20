@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2svt75w3mah6"]
+
+[ext_resource type="Script" path="res://scenes/characters/health_bar.gd" id="1_twjpf"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_coddn"]
+size = Vector2(50, 6)
+
+[node name="HealthBar" type="Sprite3D"]
+flip_v = true
+billboard = 1
+texture = SubResource("PlaceholderTexture2D_coddn")
+script = ExtResource("1_twjpf")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+debug_draw = 1
+size = Vector2i(50, 6)
+size_2d_override = Vector2i(50, 6)
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
+offset_right = 50.0
+offset_bottom = 6.0
+step = 1.0
+show_percentage = false

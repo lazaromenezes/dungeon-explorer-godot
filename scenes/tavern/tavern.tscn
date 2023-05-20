@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://cc20vtsso46be"]
+
+[ext_resource type="PackedScene" uid="uid://ph4w0emfqg8v" path="res://scenes/characters/hirelings/champion.tscn" id="2_hptbt"]
+[ext_resource type="PackedScene" uid="uid://s2pn1ecp5lsg" path="res://scenes/characters/hirelings/cleric.tscn" id="3_6ee7t"]
+[ext_resource type="PackedScene" uid="uid://cqb2iylnlarhf" path="res://scenes/characters/hirelings/fighter.tscn" id="4_76v3j"]
+[ext_resource type="PackedScene" uid="uid://hffnalfehcfj" path="res://scenes/characters/hirelings/rogue.tscn" id="5_rh7mw"]
+[ext_resource type="Script" path="res://scenes/tavern/BackButton.gd" id="6_8dk10"]
+[ext_resource type="PackedScene" uid="uid://dmi067yn4djst" path="res://scenes/characters/hirelings/wizard.tscn" id="6_dwvmy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_skocm"]
+size = Vector3(5, 0.2, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_26wdf"]
+size = Vector3(5, 0.2, 5)
+
+[node name="Tavern" type="Node3D"]
+
+[node name="Scenario" type="Node" parent="."]
+
+[node name="Ground" type="StaticBody3D" parent="Scenario"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenario/Ground"]
+shape = SubResource("BoxShape3D_skocm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenario/Ground"]
+mesh = SubResource("BoxMesh_26wdf")
+
+[node name="Camera3D" type="Camera3D" parent="Scenario"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 3.5)
+fov = 76.2445
+near = 0.179
+far = 100.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Scenario"]
+transform = Transform3D(1, 0, 0, 0, 0.875532, 0.48316, 0, -0.48316, 0.875532, 0, 2, 3)
+shadow_enabled = true
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Champion" parent="Node" instance=ExtResource("2_hptbt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26379, -2.38419e-07, 0)
+
+[node name="Cleric" parent="Node" instance=ExtResource("3_6ee7t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.315, 0, 0)
+
+[node name="Fighter" parent="Node" instance=ExtResource("4_76v3j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.058574, 0, 0)
+
+[node name="Rougue" parent="Node" instance=ExtResource("5_rh7mw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.693103, 0, 0)
+
+[node name="Wizard" parent="Node" instance=ExtResource("6_dwvmy")]
+transform = Transform3D(1, 0, 0.000959931, 0, 1, 0, -0.000959931, 0, 1, -0.478108, 0, 0)
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.849621, 0.865907)
+
+[node name="HireButton" type="Button" parent="HUD"]
+layout_mode = 0
+offset_left = 15.3009
+offset_top = 10.3937
+offset_right = 99.3009
+offset_bottom = 41.3937
+text = "Contratar"
+
+[node name="BackButton" type="Button" parent="HUD"]
+layout_mode = 0
+offset_left = 122.408
+offset_top = 10.3937
+offset_right = 177.408
+offset_bottom = 41.3937
+text = "Voltar"
+script = ExtResource("6_8dk10")

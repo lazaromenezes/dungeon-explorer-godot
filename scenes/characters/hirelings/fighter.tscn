@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqb2iylnlarhf"]
+
+[ext_resource type="PackedScene" uid="uid://cyh1885hcqv6p" path="res://scenes/characters/base_character.tscn" id="1_66kan"]
+[ext_resource type="Material" uid="uid://n4xe6w8uu3g2" path="res://materials/basic/green.tres" id="2_6gtld"]
+
+[node name="base_character" instance=ExtResource("1_66kan")]
+
+[node name="MeshInstance3D" parent="StaticBody3D" index="1"]
+surface_material_override/0 = ExtResource("2_6gtld")

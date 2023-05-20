@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc5fbfhnkx6m8"]
+
+[ext_resource type="Script" path="res://scenes/title_window/new_game_controller.gd" id="1_iatvn"]
+[ext_resource type="Script" path="res://scenes/title_window/quit_button_controller.gd" id="2_unrpa"]
+
+[node name="TitleWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NewGameButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 541.0
+offset_top = 319.0
+offset_right = 628.0
+offset_bottom = 350.0
+text = "Novo Jogo"
+script = ExtResource("1_iatvn")
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 541.0
+offset_top = 373.0
+offset_right = 628.0
+offset_bottom = 404.0
+text = "Sair"
+script = ExtResource("2_unrpa")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 517.0
+offset_top = 211.0
+offset_right = 657.0
+offset_bottom = 237.0
+text = "Dungeon Explorer"
+horizontal_alignment = 1
+vertical_alignment = 1
