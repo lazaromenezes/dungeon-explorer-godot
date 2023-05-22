@@ -1,11 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://cc20vtsso46be"]
+[gd_scene load_steps=15 format=3 uid="uid://b0i81n3envcs1"]
 
-[ext_resource type="PackedScene" uid="uid://ph4w0emfqg8v" path="res://scenes/characters/hirelings/champion.tscn" id="2_hptbt"]
-[ext_resource type="PackedScene" uid="uid://s2pn1ecp5lsg" path="res://scenes/characters/hirelings/cleric.tscn" id="3_6ee7t"]
-[ext_resource type="PackedScene" uid="uid://cqb2iylnlarhf" path="res://scenes/characters/hirelings/fighter.tscn" id="4_76v3j"]
-[ext_resource type="PackedScene" uid="uid://hffnalfehcfj" path="res://scenes/characters/hirelings/rogue.tscn" id="5_rh7mw"]
-[ext_resource type="Script" path="res://scenes/tavern/BackButton.gd" id="6_8dk10"]
-[ext_resource type="PackedScene" uid="uid://dmi067yn4djst" path="res://scenes/characters/hirelings/wizard.tscn" id="6_dwvmy"]
+[ext_resource type="PackedScene" uid="uid://6t4nndgiiqrv" path="res://scenes/characters/hirelings/champion/champion.tscn" id="2_hptbt"]
+[ext_resource type="PackedScene" uid="uid://u7tttonb88e4" path="res://scenes/characters/hirelings/cleric/cleric.tscn" id="3_6ee7t"]
+[ext_resource type="PackedScene" uid="uid://cx4gf23ugit30" path="res://scenes/characters/hirelings/fighter/fighter.tscn" id="4_76v3j"]
+[ext_resource type="PackedScene" uid="uid://dtnjygso3ouyg" path="res://scenes/characters/hirelings/rougue/rogue.tscn" id="5_rh7mw"]
+[ext_resource type="Script" path="res://scenes/tavern/hire_button.gd" id="6_6ofuo"]
+[ext_resource type="Script" path="res://scenes/tavern/back_button.gd" id="6_8dk10"]
+[ext_resource type="PackedScene" uid="uid://dxinsc5iluilg" path="res://scenes/characters/hirelings/wizard/wizard.tscn" id="6_dwvmy"]
+[ext_resource type="Resource" uid="uid://b30qbddmnj37t" path="res://scenes/characters/hirelings/champion/champion.tres" id="7_y5e7h"]
+[ext_resource type="Resource" uid="uid://dl3qeysyw1g8a" path="res://scenes/characters/hirelings/cleric/cleric.tres" id="8_t8p00"]
+[ext_resource type="Resource" uid="uid://tmcnje7lorrw" path="res://scenes/characters/hirelings/fighter/fighter.tres" id="9_1d8x7"]
+[ext_resource type="Resource" uid="uid://bwx0u5uuerl86" path="res://scenes/characters/hirelings/rougue/rogue.tres" id="10_tm08m"]
+[ext_resource type="Resource" uid="uid://cnxr2d7bhdvkt" path="res://scenes/characters/hirelings/wizard/wizard.tres" id="11_t7owy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_skocm"]
 size = Vector3(5, 0.2, 5)
@@ -24,6 +30,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 shape = SubResource("BoxShape3D_skocm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Scenario/Ground"]
+transform = Transform3D(1, 0, 0, 0, 0.999962, -0.00872654, 0, 0.00872654, 0.999962, 0, 0, 0)
 mesh = SubResource("BoxMesh_26wdf")
 
 [node name="Camera3D" type="Camera3D" parent="Scenario"]
@@ -33,25 +40,33 @@ near = 0.179
 far = 100.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Scenario"]
-transform = Transform3D(1, 0, 0, 0, 0.875532, 0.48316, 0, -0.48316, 0.875532, 0, 2, 3)
+transform = Transform3D(1, 0, 0, 0, 0.808822, 0.588054, 0, -0.588054, 0.808822, 0, 1.21501, 3.82786)
+light_volumetric_fog_energy = 0.0
+light_angular_distance = 0.5
 shadow_enabled = true
+sky_mode = 1
 
-[node name="Node" type="Node" parent="."]
+[node name="Hirelings" type="Node" parent="."]
 
-[node name="Champion" parent="Node" instance=ExtResource("2_hptbt")]
+[node name="Champion" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("2_hptbt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26379, -2.38419e-07, 0)
+hireling_stats = ExtResource("7_y5e7h")
 
-[node name="Cleric" parent="Node" instance=ExtResource("3_6ee7t")]
+[node name="Cleric" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("3_6ee7t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.315, 0, 0)
+hireling_stats = ExtResource("8_t8p00")
 
-[node name="Fighter" parent="Node" instance=ExtResource("4_76v3j")]
+[node name="Fighter" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("4_76v3j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.058574, 0, 0)
+hireling_stats = ExtResource("9_1d8x7")
 
-[node name="Rougue" parent="Node" instance=ExtResource("5_rh7mw")]
+[node name="Rougue" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("5_rh7mw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.693103, 0, 0)
+hireling_stats = ExtResource("10_tm08m")
 
-[node name="Wizard" parent="Node" instance=ExtResource("6_dwvmy")]
+[node name="Wizard" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("6_dwvmy")]
 transform = Transform3D(1, 0, 0.000959931, 0, 1, 0, -0.000959931, 0, 1, -0.478108, 0, 0)
+hireling_stats = ExtResource("11_t7owy")
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -67,6 +82,8 @@ offset_top = 10.3937
 offset_right = 99.3009
 offset_bottom = 41.3937
 text = "Contratar"
+script = ExtResource("6_6ofuo")
+available_hirelings = Array[Resource("res://scenes/characters/hirelings/hireling_stats.gd")]([ExtResource("7_y5e7h"), ExtResource("8_t8p00"), ExtResource("9_1d8x7"), ExtResource("10_tm08m"), ExtResource("11_t7owy")])
 
 [node name="BackButton" type="Button" parent="HUD"]
 layout_mode = 0

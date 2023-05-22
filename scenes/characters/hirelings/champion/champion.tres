@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="HirelingStats" load_steps=2 format=3 uid="uid://b30qbddmnj37t"]
+
+[ext_resource type="Script" path="res://scenes/characters/hirelings/hireling_stats.gd" id="1_vkwq7"]
+
+[resource]
+script = ExtResource("1_vkwq7")
+current_health = 0
+max_health = 0

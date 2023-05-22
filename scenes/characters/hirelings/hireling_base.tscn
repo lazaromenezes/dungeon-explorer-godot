@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cyh1885hcqv6p"]
+[gd_scene load_steps=5 format=3 uid="uid://cyh1885hcqv6p"]
 
-[ext_resource type="PackedScene" uid="uid://c2svt75w3mah6" path="res://scenes/characters/health_bar.tscn" id="1_fso2l"]
+[ext_resource type="Script" path="res://scenes/characters/hirelings/hireling_character.gd" id="1_igybh"]
+[ext_resource type="PackedScene" uid="uid://c2svt75w3mah6" path="res://scenes/characters/health_bar.tscn" id="2_0gblb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g6atx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_oxgiq"]
 size = Vector3(0.2, 0.2, 0.2)
 
-[node name="base_character" type="Node3D"]
+[node name="HirelingBase" type="Node3D"]
+script = ExtResource("1_igybh")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -18,5 +20,5 @@ shape = SubResource("BoxShape3D_g6atx")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_oxgiq")
 
-[node name="HealthBar" parent="." instance=ExtResource("1_fso2l")]
+[node name="HealthBar" parent="." instance=ExtResource("2_0gblb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0010488, 0.203186, -0.00124046)

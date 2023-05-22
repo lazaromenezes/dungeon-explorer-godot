@@ -20,4 +20,5 @@ size_2d_override = Vector2i(50, 6)
 offset_right = 50.0
 offset_bottom = 6.0
 step = 1.0
+rounded = true
 show_percentage = false
