@@ -33,18 +33,17 @@ shape = SubResource("BoxShape3D_skocm")
 transform = Transform3D(1, 0, 0, 0, 0.999962, -0.00872654, 0, 0.00872654, 0.999962, 0, 0, 0)
 mesh = SubResource("BoxMesh_26wdf")
 
-[node name="Camera3D" type="Camera3D" parent="Scenario"]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 3.5)
-fov = 76.2445
-near = 0.179
-far = 100.0
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Scenario"]
 transform = Transform3D(1, 0, 0, 0, 0.808822, 0.588054, 0, -0.588054, 0.808822, 0, 1.21501, 3.82786)
 light_volumetric_fog_energy = 0.0
 light_angular_distance = 0.5
 shadow_enabled = true
-sky_mode = 1
+
+[node name="Camera3D" type="Camera3D" parent="Scenario"]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965925, 0, -0.965925, 0.258819, 0, 3, 1)
+fov = 60.0
+near = 0.3
+far = 1000.0
 
 [node name="Hirelings" type="Node" parent="."]
 

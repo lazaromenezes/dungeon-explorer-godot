@@ -34,17 +34,16 @@ transform = Transform3D(1, 0, 0, 0, 0.999962, -0.00872654, 0, 0.00872654, 0.9999
 mesh = SubResource("BoxMesh_4whfm")
 
 [node name="Camera3D" type="Camera3D" parent="Scenario"]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 3.5)
-fov = 76.2445
-near = 0.179
-far = 100.0
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965925, 0, -0.965925, 0.258819, 0, 3, 1)
+fov = 60.0
+near = 0.3
+far = 1000.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Scenario"]
 transform = Transform3D(1, 0, 0, 0, 0.808822, 0.588054, 0, -0.588054, 0.808822, 0, 1.21501, 3.82786)
 light_volumetric_fog_energy = 0.0
 light_angular_distance = 0.5
 shadow_enabled = true
-sky_mode = 1
 
 [node name="Hirelings" type="Node" parent="."]
 
@@ -67,3 +66,27 @@ hireling_stats = ExtResource("9_0h26o")
 [node name="Wizard" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("10_33h4m")]
 transform = Transform3D(1, 0, 0.000959931, 0, 1, 0, -0.000959931, 0, 1, -0.478108, 0, 1.43526)
 hireling_stats = ExtResource("11_ix4u2")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RunAwayButton" type="Button" parent="HUD"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 44.0
+offset_right = 60.0
+offset_bottom = 75.0
+text = "Fugir"
+
+[node name="DungeonLevel" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 158.0
+offset_bottom = 38.0
+text = "Nível da Dungeon: "

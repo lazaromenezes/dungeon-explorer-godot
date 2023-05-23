@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="dungeon-explorer"
-run/main_scene="res://scenes/dungeon/dungeon.tscn"
+run/main_scene="res://scenes/tavern/tavern.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
 
