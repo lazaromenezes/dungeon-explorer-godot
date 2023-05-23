@@ -1,7 +1,4 @@
-extends Sprite3D
-
-func _ready():
-	texture = $SubViewport.get_texture()
+extends Node
 
 func set_progress_bar(current: int, max_value: int):
 	$SubViewport/ProgressBar.min_value = 0
