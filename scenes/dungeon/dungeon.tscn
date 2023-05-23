@@ -1,0 +1,69 @@
+[gd_scene load_steps=14 format=3 uid="uid://dkvy2eki0h3dx"]
+
+[ext_resource type="Script" path="res://scenes/dungeon/dungeon.gd" id="1_djhe0"]
+[ext_resource type="PackedScene" uid="uid://6t4nndgiiqrv" path="res://scenes/characters/hirelings/champion/champion.tscn" id="2_57tf7"]
+[ext_resource type="Resource" uid="uid://b30qbddmnj37t" path="res://scenes/characters/hirelings/champion/champion.tres" id="3_e7mab"]
+[ext_resource type="PackedScene" uid="uid://u7tttonb88e4" path="res://scenes/characters/hirelings/cleric/cleric.tscn" id="4_6i5ji"]
+[ext_resource type="Resource" uid="uid://dl3qeysyw1g8a" path="res://scenes/characters/hirelings/cleric/cleric.tres" id="5_ldxc8"]
+[ext_resource type="PackedScene" uid="uid://cx4gf23ugit30" path="res://scenes/characters/hirelings/fighter/fighter.tscn" id="6_jlof4"]
+[ext_resource type="Resource" uid="uid://tmcnje7lorrw" path="res://scenes/characters/hirelings/fighter/fighter.tres" id="7_gjgtw"]
+[ext_resource type="PackedScene" uid="uid://dtnjygso3ouyg" path="res://scenes/characters/hirelings/rougue/rogue.tscn" id="8_lrtie"]
+[ext_resource type="Resource" uid="uid://bwx0u5uuerl86" path="res://scenes/characters/hirelings/rougue/rogue.tres" id="9_0h26o"]
+[ext_resource type="PackedScene" uid="uid://dxinsc5iluilg" path="res://scenes/characters/hirelings/wizard/wizard.tscn" id="10_33h4m"]
+[ext_resource type="Resource" uid="uid://cnxr2d7bhdvkt" path="res://scenes/characters/hirelings/wizard/wizard.tres" id="11_ix4u2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d4yv6"]
+size = Vector3(5, 0.2, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4whfm"]
+size = Vector3(5, 0.2, 5)
+
+[node name="Dungeon" type="Node3D"]
+script = ExtResource("1_djhe0")
+
+[node name="Scenario" type="Node" parent="."]
+
+[node name="Ground" type="StaticBody3D" parent="Scenario"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenario/Ground"]
+shape = SubResource("BoxShape3D_d4yv6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenario/Ground"]
+transform = Transform3D(1, 0, 0, 0, 0.999962, -0.00872654, 0, 0.00872654, 0.999962, 0, 0, 0)
+mesh = SubResource("BoxMesh_4whfm")
+
+[node name="Camera3D" type="Camera3D" parent="Scenario"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 3.5)
+fov = 76.2445
+near = 0.179
+far = 100.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Scenario"]
+transform = Transform3D(1, 0, 0, 0, 0.808822, 0.588054, 0, -0.588054, 0.808822, 0, 1.21501, 3.82786)
+light_volumetric_fog_energy = 0.0
+light_angular_distance = 0.5
+shadow_enabled = true
+sky_mode = 1
+
+[node name="Hirelings" type="Node" parent="."]
+
+[node name="Champion" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("2_57tf7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.403551, -2.38419e-07, 0.206609)
+hireling_stats = ExtResource("3_e7mab")
+
+[node name="Cleric" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("4_6i5ji")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.493942, 0, 1.45663)
+hireling_stats = ExtResource("5_ldxc8")
+
+[node name="Fighter" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("6_jlof4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522175, 0, 0.121521)
+hireling_stats = ExtResource("7_gjgtw")
+
+[node name="Rougue" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("8_lrtie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0216093, 0, 0.806187)
+hireling_stats = ExtResource("9_0h26o")
+
+[node name="Wizard" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("10_33h4m")]
+transform = Transform3D(1, 0, 0.000959931, 0, 1, 0, -0.000959931, 0, 1, -0.478108, 0, 1.43526)
+hireling_stats = ExtResource("11_ix4u2")
