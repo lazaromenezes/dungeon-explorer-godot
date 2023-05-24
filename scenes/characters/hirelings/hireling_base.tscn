@@ -22,3 +22,4 @@ mesh = SubResource("BoxMesh_oxgiq")
 
 [node name="HealthBar" parent="." instance=ExtResource("2_0gblb")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.0010488, 0.203186, -0.00124046)
+symbol = "❤"

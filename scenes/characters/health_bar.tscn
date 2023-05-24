@@ -9,28 +9,22 @@ viewport_path = NodePath("SubViewport")
 script = ExtResource("1_twjpf")
 
 [node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
 handle_input_locally = false
 debug_draw = 1
-size = Vector2i(100, 26)
-size_2d_override = Vector2i(50, 6)
-
-[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
-offset_right = 80.0
-offset_bottom = 26.0
-step = 1.0
-rounded = true
-show_percentage = false
+size = Vector2i(120, 32)
+size_2d_override = Vector2i(120, 32)
 
 [node name="Label" type="Label" parent="SubViewport"]
-offset_left = 80.0
-offset_right = 100.0
-offset_bottom = 26.0
-text = "0"
-horizontal_alignment = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
 vertical_alignment = 1
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 cast_shadow = 0
 billboard = 1
-transparent = false
 texture = SubResource("ViewportTexture_lqmni")
