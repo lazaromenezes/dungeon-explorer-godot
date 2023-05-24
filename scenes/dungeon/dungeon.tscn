@@ -1,16 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://dkvy2eki0h3dx"]
+[gd_scene load_steps=12 format=3 uid="uid://dkvy2eki0h3dx"]
 
 [ext_resource type="Script" path="res://scenes/dungeon/dungeon.gd" id="1_djhe0"]
 [ext_resource type="PackedScene" uid="uid://6t4nndgiiqrv" path="res://scenes/characters/hirelings/champion/champion.tscn" id="2_57tf7"]
-[ext_resource type="Resource" uid="uid://b30qbddmnj37t" path="res://scenes/characters/hirelings/champion/champion.tres" id="3_e7mab"]
 [ext_resource type="PackedScene" uid="uid://u7tttonb88e4" path="res://scenes/characters/hirelings/cleric/cleric.tscn" id="4_6i5ji"]
-[ext_resource type="Resource" uid="uid://dl3qeysyw1g8a" path="res://scenes/characters/hirelings/cleric/cleric.tres" id="5_ldxc8"]
 [ext_resource type="PackedScene" uid="uid://cx4gf23ugit30" path="res://scenes/characters/hirelings/fighter/fighter.tscn" id="6_jlof4"]
-[ext_resource type="Resource" uid="uid://tmcnje7lorrw" path="res://scenes/characters/hirelings/fighter/fighter.tres" id="7_gjgtw"]
+[ext_resource type="PackedScene" uid="uid://2kwma0mn0rew" path="res://scenes/characters/enemies/slime/slime.tscn" id="7_3l4s3"]
+[ext_resource type="PackedScene" uid="uid://baxhwx1bs0se6" path="res://scenes/characters/enemies/goblin/goblin.tscn" id="8_b8fjs"]
 [ext_resource type="PackedScene" uid="uid://dtnjygso3ouyg" path="res://scenes/characters/hirelings/rogue/rogue.tscn" id="8_lrtie"]
-[ext_resource type="Resource" uid="uid://bwx0u5uuerl86" path="res://scenes/characters/hirelings/rogue/rogue.tres" id="9_0h26o"]
+[ext_resource type="PackedScene" uid="uid://bh2bsndlebpj1" path="res://scenes/characters/enemies/skeleton/skeleton.tscn" id="9_b3n2r"]
 [ext_resource type="PackedScene" uid="uid://dxinsc5iluilg" path="res://scenes/characters/hirelings/wizard/wizard.tscn" id="10_33h4m"]
-[ext_resource type="Resource" uid="uid://cnxr2d7bhdvkt" path="res://scenes/characters/hirelings/wizard/wizard.tres" id="11_ix4u2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d4yv6"]
 size = Vector3(5, 0.2, 5)
@@ -20,6 +18,7 @@ size = Vector3(5, 0.2, 5)
 
 [node name="Dungeon" type="Node3D"]
 script = ExtResource("1_djhe0")
+dungeon_level = 3
 
 [node name="Scenario" type="Node" parent="."]
 
@@ -49,23 +48,18 @@ shadow_enabled = true
 
 [node name="Champion" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("2_57tf7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.403551, -2.38419e-07, 0.206609)
-hireling_stats = ExtResource("3_e7mab")
 
 [node name="Cleric" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("4_6i5ji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.493942, 0, 1.45663)
-hireling_stats = ExtResource("5_ldxc8")
 
 [node name="Fighter" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("6_jlof4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522175, 0, 0.121521)
-hireling_stats = ExtResource("7_gjgtw")
 
 [node name="Rougue" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("8_lrtie")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0216093, 0, 0.806187)
-hireling_stats = ExtResource("9_0h26o")
 
 [node name="Wizard" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("10_33h4m")]
 transform = Transform3D(1, 0, 0.000959931, 0, 1, 0, -0.000959931, 0, 1, -0.478108, 0, 1.43526)
-hireling_stats = ExtResource("11_ix4u2")
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -83,10 +77,23 @@ offset_right = 60.0
 offset_bottom = 75.0
 text = "Fugir"
 
-[node name="DungeonLevel" type="Label" parent="HUD"]
+[node name="DungeonLevelText" type="Label" parent="HUD"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 12.0
 offset_right = 158.0
 offset_bottom = 38.0
-text = "Nível da Dungeon: "
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Slime" parent="Enemies" groups=["enemies_group"] instance=ExtResource("7_3l4s3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.455828, 0, -1.09997)
+visible = false
+
+[node name="Goblin" parent="Enemies" groups=["enemies_group"] instance=ExtResource("8_b8fjs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.48433)
+visible = false
+
+[node name="Skeleton" parent="Enemies" groups=["enemies_group"] instance=ExtResource("9_b3n2r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.426007, 0, -1.10088)
+visible = false

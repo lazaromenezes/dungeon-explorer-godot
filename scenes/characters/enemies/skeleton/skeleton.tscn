@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh2bsndlebpj1"]
+
+[ext_resource type="PackedScene" uid="uid://cihy5qq3wcdde" path="res://scenes/characters/enemies/enemy_base.tscn" id="1_tyby6"]
+[ext_resource type="Resource" uid="uid://dkk6c4r467463" path="res://scenes/characters/enemies/skeleton/skeleton.tres" id="2_ctw78"]
+[ext_resource type="Material" uid="uid://w0agbwsd2qgf" path="res://materials/basic/grey.tres" id="3_tf0ap"]
+
+[node name="Skeleton" instance=ExtResource("1_tyby6")]
+enemy_stats = ExtResource("2_ctw78")
+
+[node name="MeshInstance3D" parent="StaticBody3D" index="1"]
+surface_material_override/0 = ExtResource("3_tf0ap")

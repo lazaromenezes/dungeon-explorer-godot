@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=2 format=3 uid="uid://dkk6c4r467463"]
+
+[ext_resource type="Script" path="res://scenes/characters/enemies/enemy_stats.gd" id="1_v6kmn"]
+
+[resource]
+script = ExtResource("1_v6kmn")
+current_health = 0
+max_health = 0

@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://2kwma0mn0rew"]
+
+[ext_resource type="PackedScene" uid="uid://cihy5qq3wcdde" path="res://scenes/characters/enemies/enemy_base.tscn" id="1_ahdha"]
+[ext_resource type="Resource" uid="uid://d2ro0ytqhdic8" path="res://scenes/characters/enemies/slime/slime.tres" id="2_6irah"]
+[ext_resource type="Material" uid="uid://dqpnqx070cs2" path="res://materials/basic/purple.tres" id="3_uo4ko"]
+
+[node name="Slime" instance=ExtResource("1_ahdha")]
+enemy_stats = ExtResource("2_6irah")
+
+[node name="MeshInstance3D" parent="StaticBody3D" index="1"]
+surface_material_override/0 = ExtResource("3_uo4ko")
