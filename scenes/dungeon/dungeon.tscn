@@ -7,8 +7,8 @@
 [ext_resource type="Resource" uid="uid://dl3qeysyw1g8a" path="res://scenes/characters/hirelings/cleric/cleric.tres" id="5_ldxc8"]
 [ext_resource type="PackedScene" uid="uid://cx4gf23ugit30" path="res://scenes/characters/hirelings/fighter/fighter.tscn" id="6_jlof4"]
 [ext_resource type="Resource" uid="uid://tmcnje7lorrw" path="res://scenes/characters/hirelings/fighter/fighter.tres" id="7_gjgtw"]
-[ext_resource type="PackedScene" uid="uid://dtnjygso3ouyg" path="res://scenes/characters/hirelings/rougue/rogue.tscn" id="8_lrtie"]
-[ext_resource type="Resource" uid="uid://bwx0u5uuerl86" path="res://scenes/characters/hirelings/rougue/rogue.tres" id="9_0h26o"]
+[ext_resource type="PackedScene" uid="uid://dtnjygso3ouyg" path="res://scenes/characters/hirelings/rogue/rogue.tscn" id="8_lrtie"]
+[ext_resource type="Resource" uid="uid://bwx0u5uuerl86" path="res://scenes/characters/hirelings/rogue/rogue.tres" id="9_0h26o"]
 [ext_resource type="PackedScene" uid="uid://dxinsc5iluilg" path="res://scenes/characters/hirelings/wizard/wizard.tscn" id="10_33h4m"]
 [ext_resource type="Resource" uid="uid://cnxr2d7bhdvkt" path="res://scenes/characters/hirelings/wizard/wizard.tres" id="11_ix4u2"]
 

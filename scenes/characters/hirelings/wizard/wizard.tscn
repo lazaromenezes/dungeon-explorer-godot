@@ -4,8 +4,8 @@
 [ext_resource type="Material" uid="uid://dqpnqx070cs2" path="res://materials/basic/purple.tres" id="2_gjje8"]
 [ext_resource type="Resource" uid="uid://cnxr2d7bhdvkt" path="res://scenes/characters/hirelings/wizard/wizard.tres" id="2_gv0gy"]
 
-[node name="base_character" instance=ExtResource("1_tbwad")]
-hirelingType = ExtResource("2_gv0gy")
+[node name="Wizard" instance=ExtResource("1_tbwad")]
+hireling_stats = ExtResource("2_gv0gy")
 
 [node name="MeshInstance3D" parent="StaticBody3D" index="1"]
 surface_material_override/0 = ExtResource("2_gjje8")

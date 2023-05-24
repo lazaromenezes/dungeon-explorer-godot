@@ -4,8 +4,8 @@
 [ext_resource type="Material" uid="uid://w0agbwsd2qgf" path="res://materials/basic/grey.tres" id="2_jbbgn"]
 [ext_resource type="Resource" uid="uid://dl3qeysyw1g8a" path="res://scenes/characters/hirelings/cleric/cleric.tres" id="2_te4rv"]
 
-[node name="base_character" instance=ExtResource("1_b37ta")]
-hirelingType = ExtResource("2_te4rv")
+[node name="Cleric" instance=ExtResource("1_b37ta")]
+hireling_stats = ExtResource("2_te4rv")
 
 [node name="MeshInstance3D" parent="StaticBody3D" index="1"]
 surface_material_override/0 = ExtResource("2_jbbgn")
