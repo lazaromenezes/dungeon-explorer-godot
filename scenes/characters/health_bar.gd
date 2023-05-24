@@ -1,5 +1,8 @@
 extends Node
 
+func _ready():
+	$Sprite3D.texture = $SubViewport.get_texture()
+
 func set_progress_bar(current: int, max_value: int):
 	$SubViewport/ProgressBar.min_value = 0
 	$SubViewport/ProgressBar.max_value = max_value
