@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="HirelingStats" load_steps=2 format=3 uid="uid://tmcnje7lorrw"]
+[gd_resource type="Resource" script_class="HirelingStats" load_steps=3 format=3 uid="uid://tmcnje7lorrw"]
 
+[ext_resource type="Resource" uid="uid://ckm7dai66p71w" path="res://scenes/characters/enemies/goblin/goblin.tres" id="1_8jics"]
 [ext_resource type="Script" path="res://scenes/characters/hirelings/hireling_stats.gd" id="1_86lrs"]
 
 [resource]
 script = ExtResource("1_86lrs")
 current_health = 0
 max_health = 0
+preferred_enemies = Array[Resource("res://scenes/characters/enemies/enemy_stats.gd")]([ExtResource("1_8jics")])

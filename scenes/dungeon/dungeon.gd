@@ -5,8 +5,12 @@ const DUNGEON_LEVEL_LABEL: String = "Nível da Dungeon: %s"
 
 @export var dungeon_level = 0
 
+var _selected_hireling: Hireling
+
 func _ready():
+	$HUD/RunAwayButton.pressed.connect(func (): get_tree().change_scene_to_file("res://scenes/tavern/tavern.tscn"))
 	_start_party()
+	_start_dungeon()
 	
 	next_wave()
 	
@@ -14,11 +18,30 @@ func _start_party():
 	get_tree().call_group("hirelings_group", "define_health", Party.current_party)
 	
 	for hireling in $Hirelings.get_children():
-		hireling.hireling_selected.connect(_notify_selection)
+		hireling.hireling_selected.connect(_select_hireling)
+		
+func _start_dungeon():
+	for enemy in $Enemies.get_children():
+		enemy.enemy_selected.connect(_select_enemy)
 	
-func _notify_selection(selected_hireling: int):
-	get_tree().call_group("hirelings_group", "handle_selection", selected_hireling)
+func _select_hireling(selected_hireling: Hireling):
+	_selected_hireling = selected_hireling
+	_notify_hireling_group()
 	
+func _select_enemy(enemy: Enemy):
+	if(_selected_hireling != null):
+		_selected_hireling.attack(enemy)
+		_unselect_current_hireling()
+	else:
+		print("Choose attacker first")
+		
+func _unselect_current_hireling():
+	_selected_hireling = null
+	_notify_hireling_group()
+
+func _notify_hireling_group():
+	get_tree().call_group("hirelings_group", "handle_selection", _selected_hireling)
+
 func next_wave():
 	dungeon_level += 1
 	_roll_hazards()

@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="HirelingStats" load_steps=2 format=3 uid="uid://cnxr2d7bhdvkt"]
+[gd_resource type="Resource" script_class="HirelingStats" load_steps=3 format=3 uid="uid://cnxr2d7bhdvkt"]
 
+[ext_resource type="Resource" uid="uid://d2ro0ytqhdic8" path="res://scenes/characters/enemies/slime/slime.tres" id="1_ow52f"]
 [ext_resource type="Script" path="res://scenes/characters/hirelings/hireling_stats.gd" id="1_sih0v"]
 
 [resource]
 script = ExtResource("1_sih0v")
 current_health = 0
 max_health = 0
+preferred_enemies = Array[Resource("res://scenes/characters/enemies/enemy_stats.gd")]([ExtResource("1_ow52f")])

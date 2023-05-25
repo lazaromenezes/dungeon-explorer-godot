@@ -1,8 +1,12 @@
-[gd_resource type="Resource" script_class="HirelingStats" load_steps=2 format=3 uid="uid://b30qbddmnj37t"]
+[gd_resource type="Resource" script_class="HirelingStats" load_steps=5 format=3 uid="uid://b30qbddmnj37t"]
 
+[ext_resource type="Resource" uid="uid://ckm7dai66p71w" path="res://scenes/characters/enemies/goblin/goblin.tres" id="1_abtgo"]
 [ext_resource type="Script" path="res://scenes/characters/hirelings/hireling_stats.gd" id="1_vkwq7"]
+[ext_resource type="Resource" uid="uid://dkk6c4r467463" path="res://scenes/characters/enemies/skeleton/skeleton.tres" id="2_qt04r"]
+[ext_resource type="Resource" uid="uid://d2ro0ytqhdic8" path="res://scenes/characters/enemies/slime/slime.tres" id="3_um82q"]
 
 [resource]
 script = ExtResource("1_vkwq7")
 current_health = 0
 max_health = 0
+preferred_enemies = Array[Resource("res://scenes/characters/enemies/enemy_stats.gd")]([ExtResource("1_abtgo"), ExtResource("2_qt04r"), ExtResource("3_um82q")])
