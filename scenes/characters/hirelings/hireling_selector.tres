@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://2b4530oox6n2"]
+
+[ext_resource type="Shader" uid="uid://465hbm7pjjl2" path="res://scenes/characters/hirelings/hireling_base.tres" id="1_5hr05"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_5hr05")
+shader_parameter/Color = Color(0.164706, 0.494118, 0.282353, 1)
+shader_parameter/Radius = 0.48
+shader_parameter/Thickness = 0.01
+shader_parameter/Emission = Color(0, 0.639216, 0, 1)

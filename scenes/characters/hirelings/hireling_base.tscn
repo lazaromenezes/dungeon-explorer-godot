@@ -1,12 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyh1885hcqv6p"]
+[gd_scene load_steps=7 format=3 uid="uid://cyh1885hcqv6p"]
 
 [ext_resource type="Script" path="res://scenes/characters/hirelings/hireling_character.gd" id="1_igybh"]
 [ext_resource type="PackedScene" uid="uid://c2svt75w3mah6" path="res://scenes/characters/health_bar.tscn" id="2_0gblb"]
+[ext_resource type="Material" uid="uid://2b4530oox6n2" path="res://scenes/characters/hirelings/hireling_selector.tres" id="3_ojip5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g6atx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_oxgiq"]
 size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vw268"]
+lightmap_size_hint = Vector2i(3, 3)
+material = ExtResource("3_ojip5")
+size = Vector2(0.35, 0.35)
 
 [node name="HirelingBase" type="Node3D"]
 script = ExtResource("1_igybh")
@@ -23,3 +29,8 @@ mesh = SubResource("BoxMesh_oxgiq")
 [node name="HealthBar" parent="." instance=ExtResource("2_0gblb")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.0010488, 0.203186, -0.00124046)
 symbol = "❤"
+
+[node name="Indicator" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, -0.09, 0)
+visible = false
+mesh = SubResource("PlaneMesh_vw268")

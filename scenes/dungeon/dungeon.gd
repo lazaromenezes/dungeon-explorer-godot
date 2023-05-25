@@ -6,8 +6,18 @@ const DUNGEON_LEVEL_LABEL: String = "Nível da Dungeon: %s"
 @export var dungeon_level = 0
 
 func _ready():
-	get_tree().call_group("hirelings_group", "define_health", Party.current_party)
+	_start_party()
+	
 	next_wave()
+	
+func _start_party():
+	get_tree().call_group("hirelings_group", "define_health", Party.current_party)
+	
+	for hireling in $Hirelings.get_children():
+		hireling.hireling_selected.connect(_notify_selection)
+	
+func _notify_selection(selected_hireling: int):
+	get_tree().call_group("hirelings_group", "handle_selection", selected_hireling)
 	
 func next_wave():
 	dungeon_level += 1
