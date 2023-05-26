@@ -32,7 +32,7 @@ transform = Transform3D(1, 0, 0, 0, 0.999962, -0.00872654, 0, 0.00872654, 0.9999
 mesh = SubResource("BoxMesh_4whfm")
 
 [node name="Camera3D" type="Camera3D" parent="Scenario"]
-transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965925, 0, -0.965925, 0.258819, 0, 3, 1)
+transform = Transform3D(0.999998, 0.00102599, -0.00145726, 0, 0.817669, 0.575687, 0.00178221, -0.575686, 0.817668, -0.00428097, 1.69119, 2.40205)
 fov = 60.0
 near = 0.3
 far = 1000.0
