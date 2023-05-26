@@ -7,6 +7,8 @@ const DUNGEON_LEVEL_LABEL: String = "Nível da Dungeon: %s"
 
 var _selected_hireling: Hireling
 
+signal test(function)
+
 func _ready():
 	$HUD/RunAwayButton.pressed.connect(_run_away)
 	
@@ -34,6 +36,7 @@ func _select_enemy(enemy: Enemy):
 	if(_selected_hireling != null):
 		_selected_hireling.attack(enemy)
 		_unselect_current_hireling()
+		_check_remaining_moves()
 		_check_remaining_enemies()
 	else:
 		print("Choose attacker first")
@@ -47,7 +50,7 @@ func _notify_hireling_group():
 
 func next_wave():
 	dungeon_level += 1
-	_roll_hazards()
+	_roll_hazards()	
 	_update_hud()
 	
 func _roll_hazards():
@@ -70,6 +73,15 @@ func _roll_hazards():
 func _check_remaining_enemies():
 	if $Enemies.get_children().all(func(enemy:Enemy): return not enemy.is_alive()):
 		$HUD/NextWaveDialog.show()
+		
+func _check_remaining_moves():
+	var total_hirelings = 0
+	
+	for hireling in $Hirelings.get_children():
+		total_hirelings += hireling.hireling_stats.current_health
+		
+	if total_hirelings == 0:
+		$HUD/GameOver.show()
 
 func _update_hud():
 	$HUD/DungeonLevelText.text = DUNGEON_LEVEL_LABEL % dungeon_level

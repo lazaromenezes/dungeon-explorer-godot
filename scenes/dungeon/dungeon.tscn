@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dkvy2eki0h3dx"]
+[gd_scene load_steps=14 format=3 uid="uid://dkvy2eki0h3dx"]
 
 [ext_resource type="Script" path="res://scenes/dungeon/dungeon.gd" id="1_djhe0"]
 [ext_resource type="PackedScene" uid="uid://6t4nndgiiqrv" path="res://scenes/characters/hirelings/champion/champion.tscn" id="2_57tf7"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bolydffmm1fbj" path="res://scenes/ui/dialog_box.tscn" id="7_54ok1"]
 [ext_resource type="PackedScene" uid="uid://baxhwx1bs0se6" path="res://scenes/characters/enemies/goblin/goblin.tscn" id="8_b8fjs"]
 [ext_resource type="PackedScene" uid="uid://dtnjygso3ouyg" path="res://scenes/characters/hirelings/rogue/rogue.tscn" id="8_lrtie"]
+[ext_resource type="StyleBox" uid="uid://slaaldeivygs" path="res://styles/dialog_box.tres" id="8_s6wy4"]
 [ext_resource type="PackedScene" uid="uid://bh2bsndlebpj1" path="res://scenes/characters/enemies/skeleton/skeleton.tscn" id="9_b3n2r"]
 [ext_resource type="PackedScene" uid="uid://dxinsc5iluilg" path="res://scenes/characters/hirelings/wizard/wizard.tscn" id="10_33h4m"]
 
@@ -93,6 +94,41 @@ message = "Ir para o próximo nível?"
 yes_button = "Sim"
 no_button = "Não"
 
+[node name="GameOver" type="Panel" parent="HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dialog" type="PanelContainer" parent="HUD/GameOver"]
+offset_left = 545.0
+offset_top = 369.5
+offset_right = 607.0
+offset_bottom = 373.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("8_s6wy4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/GameOver/Dialog"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="HUD/GameOver/Dialog/VBoxContainer"]
+layout_mode = 2
+text = "Você não tem mais ações!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/GameOver/Dialog/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="YesButton" type="Button" parent="HUD/GameOver/Dialog/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Voltar para taverna!"
+
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Slime" parent="Enemies" groups=["enemies_group"] instance=ExtResource("7_3l4s3")]
@@ -109,3 +145,4 @@ visible = false
 
 [connection signal="cancelled_action" from="HUD/NextWaveDialog" to="." method="_on_next_wave_cancelled"]
 [connection signal="confirmed_action" from="HUD/NextWaveDialog" to="." method="_on_next_wave_confirmed"]
+[connection signal="pressed" from="HUD/GameOver/Dialog/VBoxContainer/HBoxContainer/YesButton" to="." method="_on_next_wave_cancelled"]
