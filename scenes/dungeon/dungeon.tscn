@@ -18,7 +18,6 @@ size = Vector3(5, 0.2, 5)
 
 [node name="Dungeon" type="Node3D"]
 script = ExtResource("1_djhe0")
-dungeon_level = 3
 
 [node name="Scenario" type="Node" parent="."]
 

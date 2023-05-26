@@ -27,3 +27,6 @@ func _set_current_health(health: int):
 	enemy_stats.set_current_health(health)
 	$HealthBar.call("set_progress_bar", health)
 	visible = health > 0
+	
+func is_alive():
+	return self.enemy_stats.current_health > 0

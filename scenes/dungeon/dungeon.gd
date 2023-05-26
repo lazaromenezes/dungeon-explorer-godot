@@ -32,6 +32,7 @@ func _select_enemy(enemy: Enemy):
 	if(_selected_hireling != null):
 		_selected_hireling.attack(enemy)
 		_unselect_current_hireling()
+		_check_remaining_enemies()
 	else:
 		print("Choose attacker first")
 		
@@ -63,6 +64,10 @@ func _roll_hazards():
 			rolled_group[enemy] = count
 			
 	get_tree().call_group("enemies_group", "define_health", rolled_group)
-	
+
+func _check_remaining_enemies():
+	if $Enemies.get_children().all(func(enemy:Enemy): return not enemy.is_alive()):
+		next_wave()
+
 func _update_hud():
 	$HUD/DungeonLevelText.text = DUNGEON_LEVEL_LABEL % dungeon_level
