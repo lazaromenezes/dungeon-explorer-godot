@@ -8,7 +8,8 @@ const DUNGEON_LEVEL_LABEL: String = "Nível da Dungeon: %s"
 var _selected_hireling: Hireling
 
 func _ready():
-	$HUD/RunAwayButton.pressed.connect(func (): get_tree().change_scene_to_file("res://scenes/tavern/tavern.tscn"))
+	$HUD/RunAwayButton.pressed.connect(_run_away)
+	
 	_start_party()
 	_start_dungeon()
 	
@@ -22,6 +23,7 @@ func _start_party():
 		
 func _start_dungeon():
 	for enemy in $Enemies.get_children():
+		enemy.enemy_stats.current_health = 0
 		enemy.enemy_selected.connect(_select_enemy)
 	
 func _select_hireling(selected_hireling: Hireling):
@@ -67,7 +69,16 @@ func _roll_hazards():
 
 func _check_remaining_enemies():
 	if $Enemies.get_children().all(func(enemy:Enemy): return not enemy.is_alive()):
-		next_wave()
+		$HUD/NextWaveDialog.show()
 
 func _update_hud():
 	$HUD/DungeonLevelText.text = DUNGEON_LEVEL_LABEL % dungeon_level
+
+func _on_next_wave_confirmed():
+	next_wave()
+
+func _on_next_wave_cancelled():
+	_run_away()
+	
+func _run_away(): 
+	get_tree().change_scene_to_file("res://scenes/tavern/tavern.tscn")
