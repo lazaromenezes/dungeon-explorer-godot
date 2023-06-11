@@ -2,16 +2,15 @@ extends Node3D
 
 const MAX_HAZARDS: int = 7
 const DUNGEON_LEVEL_LABEL: String = "Nível da Dungeon: %s"
+const DRAGON_AWERENESS: String = "Alerta de Dragão: %d"
 
-@export var dungeon_level = 0
+@export var dungeon_level: int = 0
+@export var rollable_hazards: Array[Node]
 
 var _selected_hireling: Hireling
-
-signal test(function)
+var _dragon_awereness: int = 0
 
 func _ready():
-	$HUD/RunAwayButton.pressed.connect(_run_away)
-	
 	_start_party()
 	_start_dungeon()
 	
@@ -22,7 +21,7 @@ func _start_party():
 	
 	for hireling in $Hirelings.get_children():
 		hireling.hireling_selected.connect(_select_hireling)
-		
+
 func _start_dungeon():
 	for enemy in $Enemies.get_children():
 		enemy.enemy_stats.current_health = 0
@@ -40,7 +39,7 @@ func _select_enemy(enemy: Enemy):
 		_check_remaining_enemies()
 	else:
 		print("Choose attacker first")
-		
+
 func _unselect_current_hireling():
 	_selected_hireling = null
 	_notify_hireling_group()
@@ -50,30 +49,34 @@ func _notify_hireling_group():
 
 func next_wave():
 	dungeon_level += 1
-	_roll_hazards()	
+	_roll_hazards()
 	_update_hud()
-	
-func _roll_hazards():
-	var max_allowed_hazards = min(dungeon_level, MAX_HAZARDS);
 
-	var rolled = [EnemyStats]
+func _roll_hazards():
+	var max_allowed_hazards = min(dungeon_level, MAX_HAZARDS) - _dragon_awereness;
+
+	var rolled = [Node]
 
 	for i in range(max_allowed_hazards):
-		rolled.append($Enemies.get_children().pick_random().enemy_stats);
+		rolled.append(rollable_hazards.pick_random().enemy_stats);
 
 	var rolled_group: Dictionary = {}
-	
-	for enemy in rolled:
-		var count = rolled.count(enemy)
+
+	for hazard in rolled:
+		var count = rolled.count(hazard)
 		if count > 0:
-			rolled_group[enemy] = count
-			
+			rolled_group[hazard] = count
+
 	get_tree().call_group("enemies_group", "define_health", rolled_group)
+	
+	if $Dragon.enemy_stats in rolled_group.keys():
+		_dragon_awereness += rolled_group[$Dragon.enemy_stats]
+		$HUD/DragonAwereness.text = DRAGON_AWERENESS % _dragon_awereness
 
 func _check_remaining_enemies():
 	if $Enemies.get_children().all(func(enemy:Enemy): return not enemy.is_alive()):
 		$HUD/NextWaveDialog.show()
-		
+
 func _check_remaining_moves():
 	var total_hirelings = 0
 	
@@ -91,6 +94,6 @@ func _on_next_wave_confirmed():
 
 func _on_next_wave_cancelled():
 	_run_away()
-	
+
 func _run_away(): 
 	get_tree().change_scene_to_file("res://scenes/tavern/tavern.tscn")

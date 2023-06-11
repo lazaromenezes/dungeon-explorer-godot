@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dkvy2eki0h3dx"]
+[gd_scene load_steps=15 format=3 uid="uid://dkvy2eki0h3dx"]
 
 [ext_resource type="Script" path="res://scenes/dungeon/dungeon.gd" id="1_djhe0"]
 [ext_resource type="PackedScene" uid="uid://6t4nndgiiqrv" path="res://scenes/characters/hirelings/champion/champion.tscn" id="2_57tf7"]
@@ -11,6 +11,7 @@
 [ext_resource type="StyleBox" uid="uid://slaaldeivygs" path="res://styles/dialog_box.tres" id="8_s6wy4"]
 [ext_resource type="PackedScene" uid="uid://bh2bsndlebpj1" path="res://scenes/characters/enemies/skeleton/skeleton.tscn" id="9_b3n2r"]
 [ext_resource type="PackedScene" uid="uid://dxinsc5iluilg" path="res://scenes/characters/hirelings/wizard/wizard.tscn" id="10_33h4m"]
+[ext_resource type="PackedScene" uid="uid://dlhgghgtdi7id" path="res://scenes/characters/enemies/dragon/dragon.tscn" id="12_ykxjg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d4yv6"]
 size = Vector3(5, 0.2, 5)
@@ -104,6 +105,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Dialog" type="PanelContainer" parent="HUD/GameOver"]
+layout_mode = 0
 offset_left = 545.0
 offset_top = 369.5
 offset_right = 607.0
@@ -129,6 +131,18 @@ theme_override_constants/separation = 20
 layout_mode = 2
 text = "Voltar para taverna!"
 
+[node name="DragonAwereness" type="Label" parent="HUD"]
+visible = false
+layout_mode = 0
+offset_top = 84.0
+offset_right = 40.0
+offset_bottom = 107.0
+text = "Alerta de Dragão: %d"
+
+[node name="Dragon" parent="." instance=ExtResource("12_ykxjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1544, -0.773635)
+visible = false
+
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Slime" parent="Enemies" groups=["enemies_group"] instance=ExtResource("7_3l4s3")]
@@ -143,6 +157,7 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.426007, 0, -1.10088)
 visible = false
 
+[connection signal="pressed" from="HUD/RunAwayButton" to="." method="_run_away"]
 [connection signal="cancelled_action" from="HUD/NextWaveDialog" to="." method="_on_next_wave_cancelled"]
 [connection signal="confirmed_action" from="HUD/NextWaveDialog" to="." method="_on_next_wave_confirmed"]
 [connection signal="pressed" from="HUD/GameOver/Dialog/VBoxContainer/HBoxContainer/YesButton" to="." method="_on_next_wave_cancelled"]
