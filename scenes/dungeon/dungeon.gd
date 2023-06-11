@@ -5,7 +5,7 @@ const DUNGEON_LEVEL_LABEL: String = "Nível da Dungeon: %s"
 const DRAGON_AWERENESS: String = "Alerta de Dragão: %d"
 
 @export var dungeon_level: int = 0
-@export var rollable_hazards: Array[Node]
+@export var rollable_hazards: Array[Enemy]
 
 var _selected_hireling: Hireling
 var _dragon_awereness: int = 0
@@ -55,7 +55,7 @@ func next_wave():
 func _roll_hazards():
 	var max_allowed_hazards = min(dungeon_level, MAX_HAZARDS) - _dragon_awereness;
 
-	var rolled = [Node]
+	var rolled : Array[EnemyStats] = []
 
 	for i in range(max_allowed_hazards):
 		rolled.append(rollable_hazards.pick_random().enemy_stats);
@@ -69,7 +69,7 @@ func _roll_hazards():
 
 	get_tree().call_group("enemies_group", "define_health", rolled_group)
 	
-	if $Dragon.enemy_stats in rolled_group.keys():
+	if $Dragon.enemy_stats in rolled_group:
 		_dragon_awereness += rolled_group[$Dragon.enemy_stats]
 		$HUD/DragonAwereness.text = DRAGON_AWERENESS % _dragon_awereness
 

@@ -19,8 +19,9 @@ size = Vector3(5, 0.2, 5)
 [sub_resource type="BoxMesh" id="BoxMesh_4whfm"]
 size = Vector3(5, 0.2, 5)
 
-[node name="Dungeon" type="Node3D"]
+[node name="Dungeon" type="Node3D" node_paths=PackedStringArray("rollable_hazards")]
 script = ExtResource("1_djhe0")
+rollable_hazards = [NodePath("Dragon"), NodePath("Enemies/Slime"), NodePath("Enemies/Goblin"), NodePath("Enemies/Skeleton")]
 
 [node name="Scenario" type="Node" parent="."]
 
@@ -132,12 +133,12 @@ layout_mode = 2
 text = "Voltar para taverna!"
 
 [node name="DragonAwereness" type="Label" parent="HUD"]
-visible = false
 layout_mode = 0
+offset_left = 13.0
 offset_top = 84.0
-offset_right = 40.0
-offset_bottom = 107.0
-text = "Alerta de Dragão: %d"
+offset_right = 161.0
+offset_bottom = 110.0
+text = "Alerta de Dragão: 0"
 
 [node name="Dragon" parent="." instance=ExtResource("12_ykxjg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1544, -0.773635)
