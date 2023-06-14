@@ -75,18 +75,19 @@ mouse_filter = 1
 
 [node name="RunAwayButton" type="Button" parent="HUD"]
 layout_mode = 0
-offset_left = 13.0
-offset_top = 44.0
-offset_right = 60.0
-offset_bottom = 75.0
+offset_left = 15.0
+offset_top = 64.0
+offset_right = 62.0
+offset_bottom = 95.0
 text = "Fugir"
 
 [node name="DungeonLevelText" type="Label" parent="HUD"]
 layout_mode = 0
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 158.0
-offset_bottom = 38.0
+offset_left = 14.0
+offset_top = 32.0
+offset_right = 169.0
+offset_bottom = 58.0
+text = "Nível da Dungeon: 0"
 
 [node name="NextWaveDialog" parent="HUD" instance=ExtResource("7_54ok1")]
 visible = false
@@ -134,11 +135,18 @@ text = "Voltar para taverna!"
 
 [node name="DragonAwereness" type="Label" parent="HUD"]
 layout_mode = 0
-offset_left = 13.0
-offset_top = 84.0
-offset_right = 161.0
-offset_bottom = 110.0
+offset_left = 15.0
+offset_top = 104.0
+offset_right = 163.0
+offset_bottom = 130.0
 text = "Alerta de Dragão: 0"
+
+[node name="CurrentPhase" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 14.0
+offset_right = 154.0
+offset_bottom = 26.0
+text = "Fase do Turno: %s"
 
 [node name="Dragon" parent="." instance=ExtResource("12_ykxjg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1544, -0.773635)
