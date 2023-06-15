@@ -9,8 +9,8 @@ func _ready():
 	$StaticBody3D.input_event.connect(_handle_input)
 
 func define_health(health_dict: Dictionary):
-	if enemy_stats in health_dict.keys():
-		_set_current_health(health_dict[enemy_stats])
+	if self in health_dict.keys():
+		_set_current_health(health_dict[self])
 		
 func _handle_input(_camera: Node, event: InputEvent, _position: Vector3,
 _normal: Vector3, _shape_idx: int):
