@@ -17,14 +17,14 @@ func _ready():
 	_dungeon_state.dragon_alerted.connect(_update_dragon_awareness)
 	_dungeon_state.level_changed.connect(_update_level)
 	
-	var combat_phase = CombatPhase.new()
+	var combat_phase = CombatPhase.new(_dungeon_state)
 	
-	var roll_phase = RollPhase.new()
+	var roll_phase = RollPhase.new(_dungeon_state)
 	roll_phase.start_func = next_wave
 	
-	var dragon_phase = DragonPhase.new()
+	var dragon_phase = DragonPhase.new(_dungeon_state)
 	
-	var regroup_phase = RegroupPhase.new()
+	var regroup_phase = RegroupPhase.new(_dungeon_state)
 	regroup_phase.start_func = _regroup_phase_start
 	
 	_start_party()
@@ -40,7 +40,7 @@ func _ready():
 func _start_turn():
 	for phase in _turn_order:
 		_current_phase = phase
-		phase.start(_dungeon_state)
+		phase.start()
 		await phase.completed
 		print_debug("PHASE COMPLETED")
 
@@ -98,7 +98,7 @@ func _roll_hazards():
 	_dungeon_state.current_enemies = rolled_group.keys()
 
 func _check_remaining_enemies():
-	_current_phase.check_completion(_dungeon_state)
+	_current_phase.check_completion()
 
 func _check_remaining_moves():
 	var total_hirelings = 0
@@ -121,7 +121,7 @@ func _regroup_phase_start():
 func _on_phase_started(phase_name: String):
 	$HUD/CurrentPhase.text = phase_name
 	await get_tree().create_timer(0.5).timeout
-	_current_phase.check_completion(_dungeon_state)
+	_current_phase.check_completion()
 
 func _on_next_wave_confirmed():
 	_current_phase.complete()
@@ -177,12 +177,16 @@ class RollPhase extends RefCounted:
 	signal started(name: String)
 	
 	var start_func: Callable
+	var _dungeon: DungeonState
 	
-	func start(_dungeon_state: DungeonState):
+	func _init(dungeon: DungeonState):
+		_dungeon = dungeon
+	
+	func start():
 		start_func.call()
 		started.emit(NAME)
 
-	func check_completion(dungeon_state: DungeonState):
+	func check_completion():
 		complete()
 			
 	func complete():
@@ -194,14 +198,19 @@ class CombatPhase extends RefCounted:
 	signal completed
 	signal started(name: String)
 	
-	func check_completion(dungeon_state: DungeonState):
-		if not dungeon_state.has_living_enemies():
+	var _dungeon: DungeonState
+	
+	func _init(dungeon: DungeonState):
+		_dungeon = dungeon
+	
+	func check_completion():
+		if not _dungeon.has_living_enemies():
 			complete()
 			
 	func complete():
 		completed.emit()
 		
-	func start(dungeon_state: DungeonState):
+	func start():
 		started.emit(NAME)
 
 class DragonPhase extends RefCounted:
@@ -210,14 +219,19 @@ class DragonPhase extends RefCounted:
 	signal completed
 	signal started(name: String)
 	
-	func start(dungeon_state: DungeonState):
-		if dungeon_state.dragon_awareness >= 3:
-			dungeon_state.dragon.visible = true
+	var _dungeon: DungeonState
+	
+	func _init(dungeon: DungeonState):
+		_dungeon = dungeon
+	
+	func start():
+		if _dungeon.dragon_awareness >= 3:
+			_dungeon.dragon.visible = true
 			
 		started.emit(NAME)
 		
-	func check_completion(dungeon_state: DungeonState):
-		if dungeon_state.dragon_awareness < 3:
+	func check_completion():
+		if _dungeon.dragon_awareness < 3:
 			complete()
 			
 	func complete():
@@ -230,12 +244,16 @@ class RegroupPhase extends RefCounted:
 	signal started(name: String)
 	
 	var start_func: Callable
+	var _dungeon: DungeonState
 	
-	func start(_dungeon_state: DungeonState):
+	func _init(dungeon: DungeonState):
+		_dungeon = dungeon
+	
+	func start():
 		start_func.call()
 		started.emit(NAME)
 		
-	func check_completion(dungeon_state: DungeonState):
+	func check_completion():
 		pass
 		
 	func complete():
