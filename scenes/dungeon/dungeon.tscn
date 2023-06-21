@@ -5,12 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://u7tttonb88e4" path="res://scenes/characters/hirelings/cleric/cleric.tscn" id="4_6i5ji"]
 [ext_resource type="PackedScene" uid="uid://cx4gf23ugit30" path="res://scenes/characters/hirelings/fighter/fighter.tscn" id="6_jlof4"]
 [ext_resource type="PackedScene" uid="uid://2kwma0mn0rew" path="res://scenes/characters/enemies/slime/slime.tscn" id="7_3l4s3"]
-[ext_resource type="PackedScene" uid="uid://bolydffmm1fbj" path="res://scenes/ui/dialog_box.tscn" id="7_54ok1"]
+[ext_resource type="PackedScene" uid="uid://d0xpbbjnv8a0o" path="res://scenes/ui/alert/alert.tscn" id="7_qitpp"]
 [ext_resource type="PackedScene" uid="uid://baxhwx1bs0se6" path="res://scenes/characters/enemies/goblin/goblin.tscn" id="8_b8fjs"]
 [ext_resource type="PackedScene" uid="uid://dtnjygso3ouyg" path="res://scenes/characters/hirelings/rogue/rogue.tscn" id="8_lrtie"]
-[ext_resource type="StyleBox" uid="uid://slaaldeivygs" path="res://styles/dialog_box.tres" id="8_s6wy4"]
 [ext_resource type="PackedScene" uid="uid://bh2bsndlebpj1" path="res://scenes/characters/enemies/skeleton/skeleton.tscn" id="9_b3n2r"]
 [ext_resource type="PackedScene" uid="uid://dxinsc5iluilg" path="res://scenes/characters/hirelings/wizard/wizard.tscn" id="10_33h4m"]
+[ext_resource type="PackedScene" uid="uid://bolydffmm1fbj" path="res://scenes/ui/confirm_dialog/confirm_dialog.tscn" id="12_5w3xi"]
 [ext_resource type="PackedScene" uid="uid://dlhgghgtdi7id" path="res://scenes/characters/enemies/dragon/dragon.tscn" id="12_ykxjg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d4yv6"]
@@ -73,6 +73,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
+[node name="NextWaveDialog" parent="HUD" instance=ExtResource("12_5w3xi")]
+visible = false
+layout_mode = 1
+message = "Ir para o próximo nível?"
+confirm_button = "Sim"
+cancel_button = "Não"
+
 [node name="RunAwayButton" type="Button" parent="HUD"]
 layout_mode = 0
 offset_left = 15.0
@@ -89,50 +96,6 @@ offset_right = 169.0
 offset_bottom = 58.0
 text = "Nível da Dungeon: 0"
 
-[node name="NextWaveDialog" parent="HUD" instance=ExtResource("7_54ok1")]
-visible = false
-layout_mode = 1
-mouse_force_pass_scroll_events = false
-message = "Ir para o próximo nível?"
-yes_button = "Sim"
-no_button = "Não"
-
-[node name="GameOver" type="Panel" parent="HUD"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Dialog" type="PanelContainer" parent="HUD/GameOver"]
-layout_mode = 0
-offset_left = 545.0
-offset_top = 369.5
-offset_right = 607.0
-offset_bottom = 373.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = ExtResource("8_s6wy4")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/GameOver/Dialog"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="Label" type="Label" parent="HUD/GameOver/Dialog/VBoxContainer"]
-layout_mode = 2
-text = "Você não tem mais ações!"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/GameOver/Dialog/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 20
-
-[node name="YesButton" type="Button" parent="HUD/GameOver/Dialog/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Voltar para taverna!"
-
 [node name="DragonAwereness" type="Label" parent="HUD"]
 layout_mode = 0
 offset_left = 15.0
@@ -147,6 +110,16 @@ offset_left = 14.0
 offset_right = 154.0
 offset_bottom = 26.0
 text = "Fase do Turno: %s"
+
+[node name="GameOverDialog" parent="HUD" instance=ExtResource("7_qitpp")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+message = "Você não tem mais ações"
+ok_button = "Fugir"
 
 [node name="Dragon" parent="." instance=ExtResource("12_ykxjg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1544, -0.773635)
@@ -166,7 +139,7 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.426007, 0, -1.10088)
 visible = false
 
-[connection signal="pressed" from="HUD/RunAwayButton" to="." method="_run_away"]
-[connection signal="cancelled_action" from="HUD/NextWaveDialog" to="." method="_on_next_wave_cancelled"]
-[connection signal="confirmed_action" from="HUD/NextWaveDialog" to="." method="_on_next_wave_confirmed"]
-[connection signal="pressed" from="HUD/GameOver/Dialog/VBoxContainer/HBoxContainer/YesButton" to="." method="_on_next_wave_cancelled"]
+[connection signal="cancelled" from="HUD/NextWaveDialog" to="." method="_on_next_wave_cancelled"]
+[connection signal="confirmed" from="HUD/NextWaveDialog" to="." method="_on_next_wave_confirmed"]
+[connection signal="pressed" from="HUD/RunAwayButton" to="." method="_on_run_away"]
+[connection signal="confirmed" from="HUD/GameOverDialog" to="." method="_on_run_away"]

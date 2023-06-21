@@ -28,14 +28,13 @@ func _ready():
 	var dragon_phase = DragonPhase.new(_dungeon_state)
 	var regroup_phase = RegroupPhase.new(_dungeon_state, _regroup_phase_start)
 	
-	_start_party()
-	_start_dungeon()
-	
 	_turn_order = [roll_phase, combat_phase, dragon_phase, regroup_phase]
 	
 	for phase in _turn_order:
 		phase.started.connect(_on_phase_started)
-	
+
+	_start_party()
+	_start_dungeon()
 	_start_turn()
 
 func _start_turn():
@@ -107,7 +106,7 @@ func _check_remaining_moves():
 		total_hirelings += hireling.hireling_stats.current_health
 		
 	if total_hirelings == 0:
-		$HUD/GameOver.show()
+		$HUD/GameOverDialog.show()
 
 func _on_level_changed(current_level: int):
 	$HUD/DungeonLevelText.text = DUNGEON_LEVEL_LABEL % current_level
@@ -129,7 +128,7 @@ func _on_next_wave_confirmed():
 
 func _on_next_wave_cancelled():
 	_current_phase.complete()
-	_run_away()
+	_on_run_away()
 
-func _run_away(): 
+func _on_run_away(): 
 	get_tree().change_scene_to_file("res://scenes/tavern/tavern.tscn")
