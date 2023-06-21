@@ -20,18 +20,13 @@ var _current_phase = null
 
 func _ready():
 	_dungeon_state = DungeonState.new($Dragon)
-	_dungeon_state.dragon_alerted.connect(_update_dragon_awareness)
-	_dungeon_state.level_changed.connect(_update_level)
+	_dungeon_state.dragon_alerted.connect(_on_dragon_alerted)
+	_dungeon_state.level_changed.connect(_on_level_changed)
 	
+	var roll_phase = RollPhase.new(_dungeon_state, _next_wave)
 	var combat_phase = CombatPhase.new(_dungeon_state)
-	
-	var roll_phase = RollPhase.new(_dungeon_state)
-	roll_phase.start_func = next_wave
-	
 	var dragon_phase = DragonPhase.new(_dungeon_state)
-	
-	var regroup_phase = RegroupPhase.new(_dungeon_state)
-	regroup_phase.start_func = _regroup_phase_start
+	var regroup_phase = RegroupPhase.new(_dungeon_state, _regroup_phase_start)
 	
 	_start_party()
 	_start_dungeon()
@@ -48,24 +43,23 @@ func _start_turn():
 		_current_phase = phase
 		phase.start()
 		await phase.completed
-		print_debug("PHASE COMPLETED")
 
 func _start_party():
 	get_tree().call_group("hirelings_group", "define_health", Party.current_party)
 	
 	for hireling in $Hirelings.get_children():
-		hireling.hireling_selected.connect(_select_hireling)
+		hireling.hireling_selected.connect(_on_hireling_selected)
 
 func _start_dungeon():
 	for enemy in $Enemies.get_children():
 		enemy.enemy_stats.current_health = 0
-		enemy.enemy_selected.connect(_select_enemy)
+		enemy.enemy_selected.connect(_on_enemy_selected)
 
-func _select_hireling(selected_hireling: Hireling):
+func _on_hireling_selected(selected_hireling: Hireling):
 	_selected_hireling = selected_hireling
 	_notify_hireling_group()
 
-func _select_enemy(enemy: Enemy):
+func _on_enemy_selected(enemy: Enemy):
 	if(_selected_hireling != null):
 		_selected_hireling.attack(enemy)
 		_unselect_current_hireling()
@@ -81,7 +75,7 @@ func _unselect_current_hireling():
 func _notify_hireling_group():
 	get_tree().call_group("hirelings_group", "handle_selection", _selected_hireling)
 
-func next_wave():
+func _next_wave():
 	_dungeon_state.advance_level()
 	
 	_roll_hazards()
@@ -115,10 +109,10 @@ func _check_remaining_moves():
 	if total_hirelings == 0:
 		$HUD/GameOver.show()
 
-func _update_level(current_level: int):
+func _on_level_changed(current_level: int):
 	$HUD/DungeonLevelText.text = DUNGEON_LEVEL_LABEL % current_level
 
-func _update_dragon_awareness(dragon_awareness: int):
+func _on_dragon_alerted(dragon_awareness: int):
 	$HUD/DragonAwereness.text = DRAGON_AWARENESS_LABEL % dragon_awareness
 
 func _regroup_phase_start():
