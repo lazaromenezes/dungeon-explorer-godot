@@ -1,9 +1,15 @@
 extends Node3D
 
-const MAX_HAZARDS: int = 7
 const DUNGEON_LEVEL_LABEL: String = "Nível da Dungeon: %s"
 const DRAGON_AWARENESS_LABEL: String = "Alerta de Dragão: %d"
 const CURRENT_PHASE_LABEL: String = "Fase do Turno: %s"
+const TURN_PHASES_PATH = "res://scripts/game_logic/turn_phases"
+
+const DungeonState = preload("res://scripts/game_logic/dungeon_state.gd")
+const RollPhase = preload("%s/roll_phase.gd" % TURN_PHASES_PATH)
+const CombatPhase = preload("%s/combat_phase.gd" % TURN_PHASES_PATH)
+const DragonPhase = preload("%s/dragon_phase.gd" % TURN_PHASES_PATH)
+const RegroupPhase = preload("%s/regroup_phase.gd" % TURN_PHASES_PATH)
 
 @export var rollable_hazards: Array[Enemy]
 
@@ -133,128 +139,3 @@ func _on_next_wave_cancelled():
 
 func _run_away(): 
 	get_tree().change_scene_to_file("res://scenes/tavern/tavern.tscn")
-
-class DungeonState extends RefCounted:
-	const MAX_ROLLS: int = 7
-	
-	var dragon: Enemy
-	
-	signal dragon_alerted(times: int)
-	signal level_changed(level: int)
-	
-	var current_enemies: Array: 
-		set(value):
-			current_enemies = value
-			if dragon in current_enemies.map(func(e): return e as Enemy):
-				dragon_awareness += 1
-	
-	var dragon_awareness: int = 0:
-		set(value):
-			dragon_awareness = value
-			dragon_alerted.emit(dragon_awareness)
-			
-	var level: int = 0:
-		set(value):
-			level = value
-			level_changed.emit(level)
-	
-	func _init(dragon_node: Node):
-		dragon = dragon_node
-			
-	func has_living_enemies():
-		return current_enemies.any(func(e: Enemy): return (e.is_alive() and e != dragon))
-		
-	func max_allowed_rolls():
-		return min(level, MAX_ROLLS) - dragon_awareness
-		
-	func advance_level():
-		level += 1
-
-class RollPhase extends RefCounted:
-	const NAME: String = "Rolagem da Dungeon"
-	
-	signal completed
-	signal started(name: String)
-	
-	var start_func: Callable
-	var _dungeon: DungeonState
-	
-	func _init(dungeon: DungeonState):
-		_dungeon = dungeon
-	
-	func start():
-		start_func.call()
-		started.emit(NAME)
-
-	func check_completion():
-		complete()
-			
-	func complete():
-		completed.emit()
-
-class CombatPhase extends RefCounted:
-	const NAME: String = "Combate"
-	
-	signal completed
-	signal started(name: String)
-	
-	var _dungeon: DungeonState
-	
-	func _init(dungeon: DungeonState):
-		_dungeon = dungeon
-	
-	func check_completion():
-		if not _dungeon.has_living_enemies():
-			complete()
-			
-	func complete():
-		completed.emit()
-		
-	func start():
-		started.emit(NAME)
-
-class DragonPhase extends RefCounted:
-	const NAME: String = "Fase do Dragão"
-	
-	signal completed
-	signal started(name: String)
-	
-	var _dungeon: DungeonState
-	
-	func _init(dungeon: DungeonState):
-		_dungeon = dungeon
-	
-	func start():
-		if _dungeon.dragon_awareness >= 3:
-			_dungeon.dragon.visible = true
-			
-		started.emit(NAME)
-		
-	func check_completion():
-		if _dungeon.dragon_awareness < 3:
-			complete()
-			
-	func complete():
-		completed.emit()
-
-class RegroupPhase extends RefCounted:
-	const NAME: String = "Fase de Reagrupar"
-	
-	signal completed()
-	signal started(name: String)
-	
-	var start_func: Callable
-	var _dungeon: DungeonState
-	
-	func _init(dungeon: DungeonState):
-		_dungeon = dungeon
-	
-	func start():
-		start_func.call()
-		started.emit(NAME)
-		
-	func check_completion():
-		pass
-		
-	func complete():
-		completed.emit()
