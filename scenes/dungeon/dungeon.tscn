@@ -64,6 +64,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0216093, 0, 0.806187)
 [node name="Wizard" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("10_33h4m")]
 transform = Transform3D(1, 0, 0.000959931, 0, 1, 0, -0.000959931, 0, 1, -0.478108, 0, 1.43526)
 
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Slime" parent="Enemies" groups=["enemies_group"] instance=ExtResource("7_3l4s3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.455828, 0, -1.09997)
+visible = false
+
+[node name="Goblin" parent="Enemies" groups=["enemies_group"] instance=ExtResource("8_b8fjs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.48433)
+visible = false
+
+[node name="Skeleton" parent="Enemies" groups=["enemies_group"] instance=ExtResource("9_b3n2r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.426007, 0, -1.10088)
+visible = false
+
+[node name="Dragon" parent="." instance=ExtResource("12_ykxjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1544, -0.773635)
+visible = false
+
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -120,24 +138,6 @@ grow_horizontal = 1
 grow_vertical = 1
 message = "Você não tem mais ações"
 ok_button = "Fugir"
-
-[node name="Dragon" parent="." instance=ExtResource("12_ykxjg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1544, -0.773635)
-visible = false
-
-[node name="Enemies" type="Node" parent="."]
-
-[node name="Slime" parent="Enemies" groups=["enemies_group"] instance=ExtResource("7_3l4s3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.455828, 0, -1.09997)
-visible = false
-
-[node name="Goblin" parent="Enemies" groups=["enemies_group"] instance=ExtResource("8_b8fjs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.48433)
-visible = false
-
-[node name="Skeleton" parent="Enemies" groups=["enemies_group"] instance=ExtResource("9_b3n2r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.426007, 0, -1.10088)
-visible = false
 
 [connection signal="cancelled" from="HUD/NextWaveDialog" to="." method="_on_next_wave_cancelled"]
 [connection signal="confirmed" from="HUD/NextWaveDialog" to="." method="_on_next_wave_confirmed"]
