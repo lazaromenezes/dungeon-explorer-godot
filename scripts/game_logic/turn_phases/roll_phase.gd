@@ -23,10 +23,3 @@ func check_completion():
 func complete():
 	completed.emit()
 	
-func _group_rolls(rolled_items: Array):
-	var group: Dictionary = {}
-	
-	for item in rolled_items:
-		var count = rolled_items.count(item)
-		if count > 0:
-			group[item] = count

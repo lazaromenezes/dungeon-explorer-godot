@@ -31,7 +31,7 @@ func has_living_enemies():
 	return current_enemies.any(func(e: Enemy): return (e.is_alive() and e != dragon))
 	
 func max_allowed_rolls():
-	return min(level, MAX_ROLLS) - dragon_awareness
+	return min(level, MAX_ROLLS - dragon_awareness)
 	
 func advance_level():
 	level += 1

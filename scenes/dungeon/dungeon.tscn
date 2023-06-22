@@ -21,7 +21,7 @@ size = Vector3(5, 0.2, 5)
 
 [node name="Dungeon" type="Node3D" node_paths=PackedStringArray("rollable_hazards")]
 script = ExtResource("1_djhe0")
-rollable_hazards = [NodePath("Dragon"), NodePath("Enemies/Slime"), NodePath("Enemies/Goblin"), NodePath("Enemies/Skeleton")]
+rollable_hazards = [NodePath("Dragon")]
 
 [node name="Scenario" type="Node" parent="."]
 

@@ -19,10 +19,19 @@ var _turn_order: Array
 var _current_phase = null
 
 func _ready():
+	_initialize_state()
+	_initialize_phases()
+	_start_party()
+	_start_enemies()
+	_start_dragon()
+	_start_turn()
+
+func _initialize_state():
 	_dungeon_state = DungeonState.new($Dragon)
 	_dungeon_state.dragon_alerted.connect(_on_dragon_alerted)
 	_dungeon_state.level_changed.connect(_on_level_changed)
-	
+
+func _initialize_phases():
 	var roll_phase = RollPhase.new(_dungeon_state, _next_wave)
 	var combat_phase = CombatPhase.new(_dungeon_state)
 	var dragon_phase = DragonPhase.new(_dungeon_state)
@@ -32,10 +41,6 @@ func _ready():
 	
 	for phase in _turn_order:
 		phase.started.connect(_on_phase_started)
-
-	_start_party()
-	_start_dungeon()
-	_start_turn()
 
 func _start_turn():
 	for phase in _turn_order:
@@ -49,10 +54,13 @@ func _start_party():
 	for hireling in $Hirelings.get_children():
 		hireling.hireling_selected.connect(_on_hireling_selected)
 
-func _start_dungeon():
+func _start_enemies():
 	for enemy in $Enemies.get_children():
 		enemy.enemy_stats.current_health = 0
 		enemy.enemy_selected.connect(_on_enemy_selected)
+		
+func _start_dragon():
+	$Dragon.enemy_selected.connect(_on_dragon_selected)
 
 func _on_hireling_selected(selected_hireling: Hireling):
 	_selected_hireling = selected_hireling
@@ -65,7 +73,16 @@ func _on_enemy_selected(enemy: Enemy):
 		_check_remaining_moves()
 		_check_remaining_enemies()
 	else:
-		print("Choose attacker first")
+		print("Escolha o aventureiro primeiro")
+
+func _on_dragon_selected(enemy: Enemy):
+	if(_selected_hireling != null):
+		_selected_hireling.attack(enemy)
+		_unselect_current_hireling()
+		_check_remaining_moves()
+		_check_dragon_is_alive()
+	else:
+		print("Escolha o aventureiro primeiro")
 
 func _unselect_current_hireling():
 	_selected_hireling = null
@@ -95,6 +112,9 @@ func _roll_hazards():
 	get_tree().call_group("enemies_group", "define_health", rolled_group)
 	
 	_dungeon_state.current_enemies = rolled_group.keys()
+
+func _check_dragon_is_alive():
+	_current_phase.check_completion()
 
 func _check_remaining_enemies():
 	_current_phase.check_completion()

@@ -10,7 +10,7 @@ func _ready():
 
 func define_health(health_dict: Dictionary):
 	if self in health_dict.keys():
-		_set_current_health(health_dict[self])
+		set_current_health(health_dict[self])
 		
 func _handle_input(_camera: Node, event: InputEvent, _position: Vector3,
 _normal: Vector3, _shape_idx: int):
@@ -18,12 +18,12 @@ _normal: Vector3, _shape_idx: int):
 		enemy_selected.emit(self)
 		
 func take_damage():
-	_set_current_health(enemy_stats.current_health - 1)
+	set_current_health(enemy_stats.current_health - 1)
 	
 func take_full_damage():
-	_set_current_health(0)
+	set_current_health(0)
 
-func _set_current_health(health: int):
+func set_current_health(health: int):
 	enemy_stats.set_current_health(health)
 	$HealthBar.call("set_progress_bar", health)
 	visible = health > 0
