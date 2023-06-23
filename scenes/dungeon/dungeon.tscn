@@ -19,9 +19,9 @@ size = Vector3(5, 0.2, 5)
 [sub_resource type="BoxMesh" id="BoxMesh_4whfm"]
 size = Vector3(5, 0.2, 5)
 
-[node name="Dungeon" type="Node3D" node_paths=PackedStringArray("rollable_hazards")]
+[node name="Dungeon" type="Node3D" node_paths=PackedStringArray("rollable_items")]
 script = ExtResource("1_djhe0")
-rollable_hazards = [NodePath("Dragon")]
+rollable_items = [NodePath("Enemies/Slime"), NodePath("Enemies/Goblin"), NodePath("Enemies/Skeleton"), NodePath("Dragon")]
 
 [node name="Scenario" type="Node" parent="."]
 

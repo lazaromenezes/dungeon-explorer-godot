@@ -1,4 +1,5 @@
 extends Node
+class_name HealthBar
 
 @export var symbol: String = ""
 

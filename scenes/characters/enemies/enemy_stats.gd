@@ -1,11 +1,16 @@
 extends Resource
 class_name EnemyStats
 
-@export var current_health: int
+signal health_changed(value: int)
+
+@export var current_health: int:
+	set(value):
+		if value > max_health:
+			max_health = value
+	
+		current_health = value
+		health_changed.emit(value)
+	
 @export var max_health: int
 
-func set_current_health(new_health: int):
-	if new_health > max_health:
-		max_health = new_health
-	
-	current_health = new_health
+@export var race: GameConstants.Race

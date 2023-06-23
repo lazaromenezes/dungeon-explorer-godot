@@ -6,3 +6,4 @@
 script = ExtResource("1_v6kmn")
 current_health = 0
 max_health = 0
+race = 2

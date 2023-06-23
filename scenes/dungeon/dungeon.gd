@@ -11,7 +11,7 @@ const CombatPhase = preload("%s/combat_phase.gd" % TURN_PHASES_PATH)
 const DragonPhase = preload("%s/dragon_phase.gd" % TURN_PHASES_PATH)
 const RegroupPhase = preload("%s/regroup_phase.gd" % TURN_PHASES_PATH)
 
-@export var rollable_hazards: Array[Enemy]
+@export var rollable_items: Array[RollableItem]
 
 var _selected_hireling: Hireling
 var _dungeon_state: DungeonState
@@ -27,12 +27,12 @@ func _ready():
 	_start_turn()
 
 func _initialize_state():
-	_dungeon_state = DungeonState.new($Dragon)
+	_dungeon_state = DungeonState.new(rollable_items)
 	_dungeon_state.dragon_alerted.connect(_on_dragon_alerted)
 	_dungeon_state.level_changed.connect(_on_level_changed)
 
 func _initialize_phases():
-	var roll_phase = RollPhase.new(_dungeon_state, _next_wave)
+	var roll_phase = RollPhase.new(_dungeon_state)
 	var combat_phase = CombatPhase.new(_dungeon_state)
 	var dragon_phase = DragonPhase.new(_dungeon_state)
 	var regroup_phase = RegroupPhase.new(_dungeon_state, _regroup_phase_start)
@@ -45,28 +45,28 @@ func _initialize_phases():
 func _start_turn():
 	for phase in _turn_order:
 		_current_phase = phase
-		phase.start()
-		await phase.completed
+		_current_phase.start()
+		await _current_phase.completed
 
 func _start_party():
 	get_tree().call_group("hirelings_group", "define_health", Party.current_party)
 	
 	for hireling in $Hirelings.get_children():
-		hireling.hireling_selected.connect(_on_hireling_selected)
+		hireling.selected.connect(_on_hireling_selected)
 
 func _start_enemies():
 	for enemy in $Enemies.get_children():
-		enemy.enemy_stats.current_health = 0
-		enemy.enemy_selected.connect(_on_enemy_selected)
+		enemy.stats.current_health = 0
+		enemy.selected.connect(_on_selected)
 		
 func _start_dragon():
-	$Dragon.enemy_selected.connect(_on_dragon_selected)
+	$Dragon.selected.connect(_on_dragon_selected)
 
 func _on_hireling_selected(selected_hireling: Hireling):
 	_selected_hireling = selected_hireling
 	_notify_hireling_group()
 
-func _on_enemy_selected(enemy: Enemy):
+func _on_selected(enemy: Enemy):
 	if(_selected_hireling != null):
 		_selected_hireling.attack(enemy)
 		_unselect_current_hireling()
@@ -91,16 +91,11 @@ func _unselect_current_hireling():
 func _notify_hireling_group():
 	get_tree().call_group("hirelings_group", "handle_selection", _selected_hireling)
 
-func _next_wave():
-	_dungeon_state.advance_level()
-	
-	_roll_hazards()
-
 func _roll_hazards():
 	var rolled : Array[Enemy] = []
 
 	for i in range(_dungeon_state.max_allowed_rolls()):
-		rolled.append(rollable_hazards.pick_random());
+		rolled.append(rollable_items.pick_random());
 
 	var rolled_group: Dictionary = {}
 
