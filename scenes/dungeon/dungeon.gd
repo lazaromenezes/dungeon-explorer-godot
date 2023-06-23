@@ -30,7 +30,6 @@ func _ready():
 
 func _initialize_state():
 	_dungeon_state = DungeonState.new(rollable_items)
-	_dungeon_state.dragon_alerted.connect(_on_dragon_alerted)
 	_dungeon_state.level_changed.connect(_on_level_changed)
 
 func _initialize_phases():
@@ -60,6 +59,8 @@ func _start_enemies():
 		enemy.stats.current_health = 0
 		enemy.selected.connect(_on_selected)
 		
+	$Dragon.alerted.connect(_on_dragon_alerted)
+
 func _start_dragon():
 	$Dragon.selected.connect(_on_dragon_selected)
 

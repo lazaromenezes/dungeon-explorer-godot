@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_hmb8l")
-current_health = 3
+current_health = 0
 max_health = 3
+race = 0

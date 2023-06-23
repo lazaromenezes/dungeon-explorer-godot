@@ -6,15 +6,14 @@ const NAME: String = "Fase do Dragão"
 signal completed
 signal started(name: String)
 
-var _dungeon
+var _dungeon: DungeonState
 
-func _init(dungeon):
+func _init(dungeon: DungeonState):
 	_dungeon = dungeon
 
 func start():
 	if _dungeon.dragon_awareness >= 3:
-		_dungeon.dragon.visible = true
-		_dungeon.dragon.set_current_health(3)
+		_dungeon.dragon.summon()
 		
 	started.emit(NAME)
 	
@@ -25,7 +24,7 @@ func check_completion():
 		complete()
 		
 func complete():
-	if _dungeon.dragon_awareness >= 3:
-		_dungeon.dragon_awareness = 0
+#	if _dungeon.dragon_awareness >= 3:
+#		_dungeon.dragon_awareness = 0
 		
 	completed.emit()
