@@ -79,7 +79,7 @@ func _on_selected(enemy: Enemy):
 
 func _on_dragon_selected(enemy: Enemy):
 	if(_selected_hireling != null):
-		_selected_hireling.attack(enemy)		
+		_selected_hireling.attack(enemy)
 		_unselect_current_hireling()
 		_check_remaining_moves()
 		_check_dragon_is_alive()
@@ -115,6 +115,7 @@ func _on_dragon_alerted(dragon_awareness: int):
 	$HUD/DragonAwereness.text = DRAGON_AWARENESS_LABEL % dragon_awareness
 
 func _regroup_phase_start():
+	get_tree().call_group("hirelings_group", "rest")
 	$HUD/NextWaveDialog.show()
 
 func _on_phase_started(phase_name: String):

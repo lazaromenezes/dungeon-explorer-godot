@@ -19,7 +19,7 @@ func _on_rolled(item):
 
 func _handle_input(_camera: Node, event: InputEvent, _position: Vector3,
 _normal: Vector3, _shape_idx: int):
-	if event.is_action_pressed("select_item") and stats.current_health > 0:
+	if event.is_action_pressed("select_item") and _is_available():
 		selected.emit(self)
 
 func handle_selection(hireling: Hireling):
@@ -31,7 +31,19 @@ func attack(enemy: Enemy):
 	else:
 		enemy.take_damage()
 	
+	if enemy is Dragon:
+		_exhaust()
+	
 	_take_damage()
 
 func _take_damage():
 	stats.current_health -= 1
+
+func _exhaust():
+	stats.condition = GameConstants.Condition.EXHAUSTED
+
+func rest():
+	stats.condition = GameConstants.Condition.READY
+
+func _is_available():
+	return stats.current_health > 0 and stats.condition != GameConstants.Condition.EXHAUSTED
