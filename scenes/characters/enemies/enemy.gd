@@ -11,7 +11,7 @@ func _ready():
 	stats.health_changed.connect(_on_health_changed)
 	stats.health_changed.connect($HealthBar.set_progress_bar)
 
-func _on_rolled():
+func _on_rolled(_item):
 	stats.current_health += 1
 
 func _handle_input(_camera: Node, event: InputEvent, _position: Vector3,

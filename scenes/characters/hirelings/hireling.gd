@@ -9,8 +9,12 @@ func _ready():
 	$StaticBody3D.input_event.connect(_handle_input)
 	rolled.connect(_on_rolled)
 	stats.health_changed.connect($HealthBar.set_progress_bar)
+	
+	if stats.character_class in Party.current:
+		stats.current_health = Party.current[stats.character_class]
 
-func _on_rolled():
+func _on_rolled(item):
+	Party.sign_up(item)
 	stats.current_health += 1
 
 func _handle_input(_camera: Node, event: InputEvent, _position: Vector3,
@@ -22,16 +26,12 @@ func handle_selection(hireling: Hireling):
 	$Indicator.visible = hireling == self
 
 func attack(enemy: Enemy):
-	if enemy.enemy_stats in stats.preferred_enemies:
+	if enemy.stats in stats.preferred_enemies:
 		enemy.take_full_damage()
 	else:
 		enemy.take_damage()
 	
 	_take_damage()
 
-func define_health(stats: HirelingStats):
-	if self.stats == stats:
-		self.stats.current_health = stats.current_health
-	
 func _take_damage():
 	stats.current_health -= 1

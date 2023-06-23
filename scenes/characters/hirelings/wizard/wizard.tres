@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_sih0v")
+preferred_enemies = Array[Resource("res://scenes/characters/enemies/enemy_stats.gd")]([ExtResource("1_ow52f")])
 current_health = 0
 max_health = 0
-preferred_enemies = Array[Resource("res://scenes/characters/enemies/enemy_stats.gd")]([ExtResource("1_ow52f")])
+character_class = 5

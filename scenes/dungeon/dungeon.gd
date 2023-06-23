@@ -1,5 +1,7 @@
 extends Node3D
 
+signal current_phase_completed()
+
 const DUNGEON_LEVEL_LABEL: String = "Nível da Dungeon: %s"
 const DRAGON_AWARENESS_LABEL: String = "Alerta de Dragão: %d"
 const CURRENT_PHASE_LABEL: String = "Fase do Turno: %s"
@@ -41,16 +43,15 @@ func _initialize_phases():
 	
 	for phase in _turn_order:
 		phase.started.connect(_on_phase_started)
+		phase.completed.connect(_on_phase_completed)
 
 func _start_turn():
 	for phase in _turn_order:
 		_current_phase = phase
 		_current_phase.start()
-		await _current_phase.completed
+		await current_phase_completed
 
 func _start_party():
-	get_tree().call_group("hirelings_group", "define_health", Party.current_party)
-	
 	for hireling in $Hirelings.get_children():
 		hireling.selected.connect(_on_hireling_selected)
 
@@ -77,7 +78,7 @@ func _on_selected(enemy: Enemy):
 
 func _on_dragon_selected(enemy: Enemy):
 	if(_selected_hireling != null):
-		_selected_hireling.attack(enemy)
+		_selected_hireling.attack(enemy)		
 		_unselect_current_hireling()
 		_check_remaining_moves()
 		_check_dragon_is_alive()
@@ -91,23 +92,6 @@ func _unselect_current_hireling():
 func _notify_hireling_group():
 	get_tree().call_group("hirelings_group", "handle_selection", _selected_hireling)
 
-func _roll_hazards():
-	var rolled : Array[Enemy] = []
-
-	for i in range(_dungeon_state.max_allowed_rolls()):
-		rolled.append(rollable_items.pick_random());
-
-	var rolled_group: Dictionary = {}
-
-	for enemy in rolled:
-		var count = rolled.count(enemy)
-		if count > 0:
-			rolled_group[enemy] = count
-
-	get_tree().call_group("enemies_group", "define_health", rolled_group)
-	
-	_dungeon_state.current_enemies = rolled_group.keys()
-
 func _check_dragon_is_alive():
 	_current_phase.check_completion()
 
@@ -118,7 +102,7 @@ func _check_remaining_moves():
 	var total_hirelings = 0
 	
 	for hireling in $Hirelings.get_children():
-		total_hirelings += hireling.hireling_stats.current_health
+		total_hirelings += hireling.stats.current_health
 		
 	if total_hirelings == 0:
 		$HUD/GameOverDialog.show()
@@ -136,6 +120,9 @@ func _on_phase_started(phase_name: String):
 	$HUD/CurrentPhase.text = phase_name
 	await get_tree().create_timer(0.5).timeout
 	_current_phase.check_completion()
+
+func _on_phase_completed():
+	current_phase_completed.emit()
 
 func _on_next_wave_confirmed():
 	_current_phase.complete()

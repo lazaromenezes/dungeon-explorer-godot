@@ -4,5 +4,7 @@
 
 [resource]
 script = ExtResource("1_tqenb")
+preferred_enemies = Array[Resource("res://scenes/characters/enemies/enemy_stats.gd")]([])
 current_health = 0
 max_health = 0
+character_class = 4

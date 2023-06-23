@@ -14,3 +14,5 @@ signal health_changed(value: int)
 		health_changed.emit(value)
 	
 @export var max_health: int
+
+@export var character_class: GameConstants.Class

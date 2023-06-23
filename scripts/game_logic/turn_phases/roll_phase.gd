@@ -15,7 +15,7 @@ func start():
 	_dungeon.advance_level()
 	
 	for roll in _max_allowed_rolls():
-		_dungeon.available_dungeon_items.pick_random().rolled.emit()
+		_dungeon.available_dungeon_items.pick_random().notify_roll()
 	
 	started.emit(NAME)
 

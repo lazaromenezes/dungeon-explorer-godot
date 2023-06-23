@@ -58,7 +58,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.493942, 0, 1.45663)
 [node name="Fighter" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("6_jlof4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522175, 0, 0.121521)
 
-[node name="Rougue" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("8_lrtie")]
+[node name="Rogue" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("8_lrtie")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0216093, 0, 0.806187)
 
 [node name="Wizard" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("10_33h4m")]
