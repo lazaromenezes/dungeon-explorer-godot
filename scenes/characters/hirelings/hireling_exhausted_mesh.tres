@@ -1,0 +1,9 @@
+[gd_resource type="PlaneMesh" load_steps=2 format=3 uid="uid://dne0fhj0qndwh"]
+
+[ext_resource type="Material" uid="uid://cav4sftu0c7eq" path="res://scenes/characters/hirelings/hireling_exhausted.tres" id="1_fwt8y"]
+
+[resource]
+resource_local_to_scene = true
+lightmap_size_hint = Vector2i(3, 3)
+material = ExtResource("1_fwt8y")
+size = Vector2(0.35, 0.35)

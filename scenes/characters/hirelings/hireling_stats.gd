@@ -2,6 +2,7 @@ extends Resource
 class_name HirelingStats
 
 signal health_changed(value: int)
+signal condition_changed(condition: GameConstants.Condition)
 
 @export var preferred_enemies: Array[EnemyStats]
 
@@ -17,4 +18,8 @@ signal health_changed(value: int)
 
 @export var character_class: GameConstants.Class
 
-@export var condition: GameConstants.Condition
+@export var condition: GameConstants.Condition:
+	set(value):
+		if value != condition:
+			condition = value
+			condition_changed.emit(value)
