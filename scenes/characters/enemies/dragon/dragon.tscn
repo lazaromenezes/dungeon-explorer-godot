@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlhgghgtdi7id"]
+[gd_scene load_steps=5 format=3 uid="uid://dlhgghgtdi7id"]
 
-[ext_resource type="PackedScene" uid="uid://cihy5qq3wcdde" path="res://scenes/characters/enemies/enemy_base.tscn" id="1_pqafl"]
+[ext_resource type="PackedScene" uid="uid://cihy5qq3wcdde" path="res://scenes/characters/enemies/enemy.tscn" id="1_pqafl"]
 [ext_resource type="Resource" uid="uid://mpbm5su6hy2e" path="res://scenes/characters/enemies/dragon/dragon.tres" id="2_lyayr"]
+[ext_resource type="Script" path="res://scenes/characters/enemies/dragon/dragon.gd" id="2_us5kb"]
 [ext_resource type="Material" uid="uid://c1nfkedbln4sc" path="res://materials/basic/red.tres" id="3_0txqm"]
 
 [node name="Dragon" instance=ExtResource("1_pqafl")]
-enemy_stats = ExtResource("2_lyayr")
+script = ExtResource("2_us5kb")
+stats = ExtResource("2_lyayr")
 
 [node name="MeshInstance3D" parent="StaticBody3D" index="1"]
 surface_material_override/0 = ExtResource("3_0txqm")

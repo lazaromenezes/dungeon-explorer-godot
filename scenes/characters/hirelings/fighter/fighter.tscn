@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://cx4gf23ugit30"]
 
-[ext_resource type="PackedScene" uid="uid://cyh1885hcqv6p" path="res://scenes/characters/hirelings/hireling_base.tscn" id="1_66kan"]
+[ext_resource type="PackedScene" uid="uid://cyh1885hcqv6p" path="res://scenes/characters/hirelings/hireling.tscn" id="1_66kan"]
 [ext_resource type="Material" uid="uid://n4xe6w8uu3g2" path="res://materials/basic/green.tres" id="2_6gtld"]
 [ext_resource type="Resource" uid="uid://tmcnje7lorrw" path="res://scenes/characters/hirelings/fighter/fighter.tres" id="2_6u4hr"]
 
 [node name="Fighter" instance=ExtResource("1_66kan")]
-hireling_stats = ExtResource("2_6u4hr")
+stats = ExtResource("2_6u4hr")
 
 [node name="MeshInstance3D" parent="StaticBody3D" index="1"]
 surface_material_override/0 = ExtResource("2_6gtld")

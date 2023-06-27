@@ -6,15 +6,17 @@ const NAME: String = "Rolagem da Dungeon"
 signal completed
 signal started(name: String)
 
-var _on_start: Callable
 var _dungeon: DungeonState
 
-func _init(dungeon: DungeonState, on_start: Callable):
+func _init(dungeon: DungeonState):
 	_dungeon = dungeon
-	_on_start = on_start
 
 func start():
-	_on_start.call()
+	_dungeon.advance_level()
+	
+	for roll in _max_allowed_rolls():
+		_dungeon.available_dungeon_items.pick_random().notify_roll()
+	
 	started.emit(NAME)
 
 func check_completion():
@@ -23,10 +25,5 @@ func check_completion():
 func complete():
 	completed.emit()
 	
-func _group_rolls(rolled_items: Array):
-	var group: Dictionary = {}
-	
-	for item in rolled_items:
-		var count = rolled_items.count(item)
-		if count > 0:
-			group[item] = count
+func _max_allowed_rolls():
+	return min(_dungeon.level, GameConstants.MAX_ROLLS_ALLOWED - _dungeon.dragon_awareness)

@@ -6,9 +6,9 @@ const NAME: String = "Combate"
 signal completed
 signal started(name: String)
 
-var _dungeon
+var _dungeon: DungeonState
 
-func _init(dungeon):
+func _init(dungeon: DungeonState):
 	_dungeon = dungeon
 
 func check_completion():

@@ -1,14 +1,25 @@
 extends Resource
 class_name HirelingStats
 
-@export var current_health: int
-@export var max_health: int
+signal health_changed(value: int)
+signal condition_changed(condition: GameConstants.Condition)
 
 @export var preferred_enemies: Array[EnemyStats]
 
-func set_current_health(new_health: int):
-	if new_health > max_health:
-		max_health = new_health
+@export var current_health: int:
+	set(value):
+		if value > max_health:
+			max_health = value
 	
-	current_health = new_health
+		current_health = value
+		health_changed.emit(value)
+	
+@export var max_health: int
 
+@export var character_class: GameConstants.Class
+
+@export var condition: GameConstants.Condition:
+	set(value):
+		if value != condition:
+			condition = value
+			condition_changed.emit(value)
