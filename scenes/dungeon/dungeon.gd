@@ -83,25 +83,25 @@ func _on_enemy_selected(enemy: Enemy):
 		_selected_hireling.attack(enemy)
 		_finish_hireling_action()
 	else:
-		print("Escolha o aventureiro primeiro")
+		_show_alert("Escolha o aventureiro primeiro")
 		
 func _on_loot_selected(item: LootItem):
 	if not _current_phase is LootPhase:
-		print("Não está na fase de loot")
+		_show_alert("Aguarde a fase de saque")
 		return
 	
 	if _selected_hireling != null:
 		_selected_hireling.use(item)
 		_finish_hireling_action()
 	else:
-		print("Escolha o aventureiro primeiro")
+		_show_alert("Escolha o aventureiro primeiro")
 	
 func _on_dragon_selected(enemy: Enemy):
 	if(_selected_hireling != null):
 		_selected_hireling.attack(enemy)
 		_finish_hireling_action()
 	else:
-		print("Escolha o aventureiro primeiro")
+		_show_alert("Escolha o aventureiro primeiro")
 
 func _finish_hireling_action():
 	_unselect_current_hireling()
@@ -153,4 +153,11 @@ func _on_next_wave_cancelled():
 func _on_run_away(): 
 	get_tree().change_scene_to_file("res://scenes/tavern/tavern.tscn")
 	
-
+func _show_alert(message: String):
+	var alert = Alert.instantiate()
+	alert.visible = false
+	alert.message = message
+	$HUD.add_child(alert)
+	alert.show()
+	await alert.confirmed
+	alert.queue_free()
