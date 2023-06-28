@@ -65,7 +65,7 @@ func _start_enemies():
 		enemy.selected.connect(_on_enemy_selected)
 		
 	$Dragon.alerted.connect(_on_dragon_alerted)
-	
+
 func _start_loot_items():
 	for item in $Loot.get_children():
 		item.properties.count = 0
@@ -84,18 +84,18 @@ func _on_enemy_selected(enemy: Enemy):
 		_finish_hireling_action()
 	else:
 		_show_alert("Escolha o aventureiro primeiro")
-		
+
 func _on_loot_selected(item: LootItem):
 	if not _current_phase is LootPhase:
 		_show_alert("Aguarde a fase de saque")
 		return
-	
+
 	if _selected_hireling != null:
 		_selected_hireling.use(item)
 		_finish_hireling_action()
 	else:
 		_show_alert("Escolha o aventureiro primeiro")
-	
+
 func _on_dragon_selected(enemy: Enemy):
 	if(_selected_hireling != null):
 		_selected_hireling.attack(enemy)
@@ -152,7 +152,7 @@ func _on_next_wave_cancelled():
 
 func _on_run_away(): 
 	get_tree().change_scene_to_file("res://scenes/tavern/tavern.tscn")
-	
+
 func _show_alert(message: String):
 	var alert = Alert.instantiate()
 	alert.visible = false
