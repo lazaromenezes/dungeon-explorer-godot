@@ -38,6 +38,11 @@ func attack(enemy: Enemy):
 	
 	_take_damage()
 
+func use(item: LootItem):
+	item.use()
+	
+	_take_damage()
+
 func _take_damage():
 	stats.current_health -= 1
 

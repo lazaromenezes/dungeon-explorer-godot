@@ -3,7 +3,7 @@ class_name LootItem
 
 @export var properties: LootItemProperties
 
-signal selected(stats: Enemy)
+signal selected(item: LootItem)
 
 func _ready():
 	$StaticBody3D.input_event.connect(_handle_input)
@@ -21,3 +21,7 @@ _normal: Vector3, _shape_idx: int):
 
 func _on_count_changed(count: int):
 	visible = count > 0
+	
+func use():
+	if properties.count > 0:
+		properties.count -= 1

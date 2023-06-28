@@ -4,6 +4,8 @@ class_name DungeonState
 signal level_changed(level: int)
 
 var current_enemies: Array[Enemy]
+var current_items: Array[LootItem]
+
 var available_dungeon_items: Array[RollableItem]
 var dragon: Dragon
 
@@ -26,6 +28,9 @@ func _init(dungeon_items: Array[RollableItem]):
 
 func has_living_enemies():
 	return current_enemies.filter(_remove_dragon).any(_is_alive)
+
+func has_remaining_items():
+	return current_items.any(_is_untouched)
 	
 func advance_level():
 	level += 1
@@ -36,6 +41,9 @@ func _remove_dragon(e: Enemy):
 func _is_alive(e: Enemy):
 	return e.is_alive()
 	
+func _is_untouched(i: LootItem):
+	return i.properties.count > 0
+	
 func _on_item_rolled(item: RollableItem):
 	if item is Enemy:
 		if item.stats.race == GameConstants.Race.DRAGON:
@@ -43,4 +51,8 @@ func _on_item_rolled(item: RollableItem):
 		
 		if item not in current_enemies:
 			current_enemies.append(item)
+			
+	elif item is LootItem:
+		if item not in current_items:
+			current_items.append(item)
 

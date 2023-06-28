@@ -10,8 +10,11 @@ const TURN_PHASES_PATH = "res://scripts/game_logic/turn_phases"
 const DungeonState = preload("res://scripts/game_logic/dungeon_state.gd")
 const RollPhase = preload("%s/roll_phase.gd" % TURN_PHASES_PATH)
 const CombatPhase = preload("%s/combat_phase.gd" % TURN_PHASES_PATH)
+const LootPhase = preload("%s/loot_phase.gd" % TURN_PHASES_PATH)
 const DragonPhase = preload("%s/dragon_phase.gd" % TURN_PHASES_PATH)
 const RegroupPhase = preload("%s/regroup_phase.gd" % TURN_PHASES_PATH)
+
+const Alert = preload("res://scenes/ui/alert/alert.tscn")
 
 @export var rollable_items: Array[RollableItem]
 
@@ -25,6 +28,7 @@ func _ready():
 	_initialize_phases()
 	_start_party()
 	_start_enemies()
+	_start_loot_items()
 	_start_dragon()
 	_start_turn()
 
@@ -35,10 +39,11 @@ func _initialize_state():
 func _initialize_phases():
 	var roll_phase = RollPhase.new(_dungeon_state)
 	var combat_phase = CombatPhase.new(_dungeon_state)
+	var loot_phase = LootPhase.new(_dungeon_state)
 	var dragon_phase = DragonPhase.new(_dungeon_state)
 	var regroup_phase = RegroupPhase.new(_dungeon_state, _regroup_phase_start)
 	
-	_turn_order = [roll_phase, combat_phase, dragon_phase, regroup_phase]
+	_turn_order = [roll_phase, combat_phase, loot_phase, dragon_phase, regroup_phase]
 	
 	for phase in _turn_order:
 		phase.started.connect(_on_phase_started)
@@ -57,9 +62,14 @@ func _start_party():
 func _start_enemies():
 	for enemy in $Enemies.get_children():
 		enemy.stats.current_health = 0
-		enemy.selected.connect(_on_selected)
+		enemy.selected.connect(_on_enemy_selected)
 		
 	$Dragon.alerted.connect(_on_dragon_alerted)
+	
+func _start_loot_items():
+	for item in $Loot.get_children():
+		item.properties.count = 0
+		item.selected.connect(_on_loot_selected)
 
 func _start_dragon():
 	$Dragon.selected.connect(_on_dragon_selected)
@@ -68,23 +78,35 @@ func _on_hireling_selected(selected_hireling: Hireling):
 	_selected_hireling = selected_hireling
 	_notify_hireling_group()
 
-func _on_selected(enemy: Enemy):
-	if(_selected_hireling != null):
+func _on_enemy_selected(enemy: Enemy):
+	if _selected_hireling != null:
 		_selected_hireling.attack(enemy)
-		_unselect_current_hireling()
-		_check_remaining_moves()
-		_check_remaining_enemies()
+		_finish_hireling_action()
 	else:
 		print("Escolha o aventureiro primeiro")
-
+		
+func _on_loot_selected(item: LootItem):
+	if not _current_phase is LootPhase:
+		print("Não está na fase de loot")
+		return
+	
+	if _selected_hireling != null:
+		_selected_hireling.use(item)
+		_finish_hireling_action()
+	else:
+		print("Escolha o aventureiro primeiro")
+	
 func _on_dragon_selected(enemy: Enemy):
 	if(_selected_hireling != null):
 		_selected_hireling.attack(enemy)
-		_unselect_current_hireling()
-		_check_remaining_moves()
-		_check_dragon_is_alive()
+		_finish_hireling_action()
 	else:
 		print("Escolha o aventureiro primeiro")
+
+func _finish_hireling_action():
+	_unselect_current_hireling()
+	_check_remaining_moves()
+	_current_phase.check_completion()
 
 func _unselect_current_hireling():
 	_selected_hireling = null
@@ -92,12 +114,6 @@ func _unselect_current_hireling():
 
 func _notify_hireling_group():
 	get_tree().call_group("hirelings_group", "handle_selection", _selected_hireling)
-
-func _check_dragon_is_alive():
-	_current_phase.check_completion()
-
-func _check_remaining_enemies():
-	_current_phase.check_completion()
 
 func _check_remaining_moves():
 	var total_hirelings = 0
@@ -120,7 +136,7 @@ func _regroup_phase_start():
 
 func _on_phase_started(phase_name: String):
 	$HUD/CurrentPhase.text = phase_name
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.1).timeout
 	_current_phase.check_completion()
 
 func _on_phase_completed():
@@ -136,3 +152,5 @@ func _on_next_wave_cancelled():
 
 func _on_run_away(): 
 	get_tree().change_scene_to_file("res://scenes/tavern/tavern.tscn")
+	
+
