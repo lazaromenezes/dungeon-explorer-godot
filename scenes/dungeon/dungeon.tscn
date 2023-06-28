@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dkvy2eki0h3dx"]
+[gd_scene load_steps=17 format=3 uid="uid://dkvy2eki0h3dx"]
 
 [ext_resource type="Script" path="res://scenes/dungeon/dungeon.gd" id="1_djhe0"]
 [ext_resource type="PackedScene" uid="uid://6t4nndgiiqrv" path="res://scenes/characters/hirelings/champion/champion.tscn" id="2_57tf7"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://dtnjygso3ouyg" path="res://scenes/characters/hirelings/rogue/rogue.tscn" id="8_lrtie"]
 [ext_resource type="PackedScene" uid="uid://bh2bsndlebpj1" path="res://scenes/characters/enemies/skeleton/skeleton.tscn" id="9_b3n2r"]
 [ext_resource type="PackedScene" uid="uid://dxinsc5iluilg" path="res://scenes/characters/hirelings/wizard/wizard.tscn" id="10_33h4m"]
+[ext_resource type="PackedScene" uid="uid://ca0n7nb4gya7x" path="res://scenes/items/loot_item/chest/chest.tscn" id="10_814se"]
+[ext_resource type="PackedScene" uid="uid://c16ipdtlnb1tb" path="res://scenes/items/loot_item/potion/potion.tscn" id="11_y5i8w"]
 [ext_resource type="PackedScene" uid="uid://bolydffmm1fbj" path="res://scenes/ui/confirm_dialog/confirm_dialog.tscn" id="12_5w3xi"]
 [ext_resource type="PackedScene" uid="uid://dlhgghgtdi7id" path="res://scenes/characters/enemies/dragon/dragon.tscn" id="12_ykxjg"]
 
@@ -21,7 +23,7 @@ size = Vector3(5, 0.2, 5)
 
 [node name="Dungeon" type="Node3D" node_paths=PackedStringArray("rollable_items")]
 script = ExtResource("1_djhe0")
-rollable_items = [NodePath("Enemies/Slime"), NodePath("Enemies/Goblin"), NodePath("Enemies/Skeleton"), NodePath("Dragon")]
+rollable_items = [NodePath("Enemies/Slime"), NodePath("Enemies/Goblin"), NodePath("Enemies/Skeleton"), NodePath("Dragon"), NodePath("Loot/Chest"), NodePath("Loot/Potion")]
 
 [node name="Scenario" type="Node" parent="."]
 
@@ -76,6 +78,16 @@ visible = false
 
 [node name="Skeleton" parent="Enemies" groups=["enemies_group"] instance=ExtResource("9_b3n2r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.426007, 0, -1.10088)
+visible = false
+
+[node name="Loot" type="Node" parent="."]
+
+[node name="Chest" parent="Loot" instance=ExtResource("10_814se")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.183733, 0, -1.44397)
+visible = false
+
+[node name="Potion" parent="Loot" instance=ExtResource("11_y5i8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -1.415)
 visible = false
 
 [node name="Dragon" parent="." instance=ExtResource("12_ykxjg")]

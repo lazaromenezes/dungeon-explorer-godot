@@ -9,3 +9,4 @@ preferred_enemies = Array[Resource("res://scenes/characters/enemies/enemy_stats.
 current_health = 0
 max_health = 0
 character_class = 3
+condition = 0

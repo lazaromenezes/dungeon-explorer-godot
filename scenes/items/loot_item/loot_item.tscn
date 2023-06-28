@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfcn1333vxv3p"]
+
+[ext_resource type="PackedScene" uid="uid://c2svt75w3mah6" path="res://scenes/characters/health_bar.tscn" id="1_4xw6c"]
+[ext_resource type="Script" path="res://scenes/items/loot_item/loot_item.gd" id="1_af7r3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3tpt2"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_58ow4"]
+
+[node name="LootItem" type="Node3D"]
+script = ExtResource("1_af7r3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("BoxShape3D_3tpt2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("PrismMesh_58ow4")
+
+[node name="HealthBar" parent="." instance=ExtResource("1_4xw6c")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.2, 0)
+symbol = "🪙"
