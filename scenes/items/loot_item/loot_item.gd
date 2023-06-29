@@ -25,3 +25,6 @@ func _on_count_changed(count: int):
 func use():
 	if properties.count > 0:
 		properties.count -= 1
+		
+func use_all():
+	properties.count = 0

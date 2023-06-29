@@ -39,7 +39,10 @@ func attack(enemy: Enemy):
 	_take_damage()
 
 func use(item: LootItem):
-	item.use()
+	if item.properties in stats.preferred_items:
+		item.use_all()
+	else:
+		item.use()
 	
 	_take_damage()
 

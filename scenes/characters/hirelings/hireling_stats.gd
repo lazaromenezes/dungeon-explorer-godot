@@ -5,6 +5,7 @@ signal health_changed(value: int)
 signal condition_changed(condition: GameConstants.Condition)
 
 @export var preferred_enemies: Array[EnemyStats]
+@export var preferred_items: Array[LootItemProperties]
 
 @export var current_health: int:
 	set(value):
