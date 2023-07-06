@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://ca0n7nb4gya7x"]
+[gd_scene load_steps=5 format=3 uid="uid://ca0n7nb4gya7x"]
 
 [ext_resource type="PackedScene" uid="uid://bfcn1333vxv3p" path="res://scenes/items/loot_item/loot_item.tscn" id="1_0bhr3"]
 [ext_resource type="Resource" uid="uid://q4e8yecggj6r" path="res://scenes/items/loot_item/chest/chest.tres" id="2_ffrga"]
 [ext_resource type="Material" uid="uid://ciar62gxvpv8r" path="res://materials/basic/pink.tres" id="2_t3hjh"]
+[ext_resource type="Script" path="res://scenes/items/loot_item/chest/chest.gd" id="2_veemy"]
 
 [node name="Chest" instance=ExtResource("1_0bhr3")]
+script = ExtResource("2_veemy")
 properties = ExtResource("2_ffrga")
 
 [node name="MeshInstance3D" parent="StaticBody3D" index="1"]

@@ -4,6 +4,8 @@ class_name LootItem
 @export var properties: LootItemProperties
 
 signal selected(item: LootItem)
+signal used(amount: int)
+signal checked()
 
 func _ready():
 	$StaticBody3D.input_event.connect(_handle_input)
@@ -25,6 +27,9 @@ func _on_count_changed(count: int):
 func use():
 	if properties.count > 0:
 		properties.count -= 1
-		
+		used.emit(1)
+
 func use_all():
-	properties.count = 0
+	if properties.count > 0:
+		used.emit(properties.count)
+		properties.count = 0

@@ -92,6 +92,7 @@ func _on_loot_selected(item: LootItem):
 
 	if _selected_hireling != null:
 		_selected_hireling.use(item)
+		await item.checked
 		_finish_hireling_action()
 	else:
 		_show_alert("Escolha o aventureiro primeiro")
