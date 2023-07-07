@@ -70,6 +70,8 @@ func _start_loot_items():
 	for item in $Loot.get_children():
 		item.properties.count = 0
 		item.selected.connect(_on_loot_selected)
+		
+	$Loot/Chest.resolved.connect(_on_chest_resolved)
 
 func _start_dragon():
 	$Dragon.selected.connect(_on_dragon_selected)
@@ -92,7 +94,7 @@ func _on_loot_selected(item: LootItem):
 
 	if _selected_hireling != null:
 		_selected_hireling.use(item)
-		await item.checked
+		await item.resolved
 		_finish_hireling_action()
 	else:
 		_show_alert("Escolha o aventureiro primeiro")
@@ -162,3 +164,6 @@ func _show_alert(message: String):
 	alert.show()
 	await alert.confirmed
 	alert.queue_free()
+	
+func _on_chest_resolved(looted_items):
+	print(looted_items)

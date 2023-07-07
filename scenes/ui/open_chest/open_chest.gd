@@ -2,17 +2,14 @@ extends Control
 
 signal checked()
 
-func show_loot(item_count: int):
-	for i in item_count:
-		_show_loot()
+func show_loot(looted_items):
+	for item in looted_items:
+		_show_item(item)
 
-func _show_loot():
+func _show_item(item):
 	var label = Label.new()
-	label.text = str(_loot())
+	label.text = item
 	$PanelContainer/VBoxContainer/ItemContainer.add_child(label)
-
-func _loot():
-	return GameConstants.Item.keys().pick_random()
 
 func _on_button_pressed():
 	checked.emit()

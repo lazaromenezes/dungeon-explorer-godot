@@ -5,7 +5,7 @@ class_name LootItem
 
 signal selected(item: LootItem)
 signal used(amount: int)
-signal checked()
+signal resolved(result)
 
 func _ready():
 	$StaticBody3D.input_event.connect(_handle_input)
