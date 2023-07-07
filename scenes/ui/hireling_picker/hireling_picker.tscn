@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfpcyy83lhc56"]
+
+[ext_resource type="Script" path="res://scenes/ui/hireling_picker/hireling_picker.gd" id="1_lmnv2"]
+[ext_resource type="StyleBox" uid="uid://slaaldeivygs" path="res://styles/dialog_box.tres" id="2_65vx5"]
+
+[node name="HirelingPicker" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_lmnv2")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.5
+offset_top = -30.0
+offset_right = 69.5
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_65vx5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Selecione o hireling para contratar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HirelingsContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Champion" type="Button" parent="PanelContainer/VBoxContainer/HirelingsContainer"]
+layout_mode = 2
+text = "CAMPEÃO"
+
+[node name="Cleric" type="Button" parent="PanelContainer/VBoxContainer/HirelingsContainer"]
+layout_mode = 2
+text = "CLÉRIGO"
+
+[node name="Fighter" type="Button" parent="PanelContainer/VBoxContainer/HirelingsContainer"]
+layout_mode = 2
+text = "GUERREIRO"
+
+[node name="Rogue" type="Button" parent="PanelContainer/VBoxContainer/HirelingsContainer"]
+layout_mode = 2
+text = "LADINO"
+
+[node name="Wizard" type="Button" parent="PanelContainer/VBoxContainer/HirelingsContainer"]
+layout_mode = 2
+text = "MAGO"
+
+[node name="HiredAvailable" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "#/#"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "OK"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
