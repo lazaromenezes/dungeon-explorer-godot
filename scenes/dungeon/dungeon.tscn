@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dkvy2eki0h3dx"]
+[gd_scene load_steps=18 format=3 uid="uid://dkvy2eki0h3dx"]
 
 [ext_resource type="Script" path="res://scenes/dungeon/dungeon.gd" id="1_djhe0"]
 [ext_resource type="PackedScene" uid="uid://6t4nndgiiqrv" path="res://scenes/characters/hirelings/champion/champion.tscn" id="2_57tf7"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c16ipdtlnb1tb" path="res://scenes/items/loot_item/potion/potion.tscn" id="11_y5i8w"]
 [ext_resource type="PackedScene" uid="uid://bolydffmm1fbj" path="res://scenes/ui/confirm_dialog/confirm_dialog.tscn" id="12_5w3xi"]
 [ext_resource type="PackedScene" uid="uid://dlhgghgtdi7id" path="res://scenes/characters/enemies/dragon/dragon.tscn" id="12_ykxjg"]
+[ext_resource type="Script" path="res://scenes/dungeon/hud.gd" id="13_bd57x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d4yv6"]
 size = Vector3(5, 0.2, 5)
@@ -94,7 +95,7 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1544, -0.773635)
 visible = false
 
-[node name="HUD" type="Control" parent="."]
+[node name="ExplorationHUD" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -102,15 +103,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+script = ExtResource("13_bd57x")
 
-[node name="NextWaveDialog" parent="HUD" instance=ExtResource("12_5w3xi")]
+[node name="NextWaveDialog" parent="ExplorationHUD" instance=ExtResource("12_5w3xi")]
 visible = false
 layout_mode = 1
 message = "Ir para o próximo nível?"
 confirm_button = "Sim"
 cancel_button = "Não"
 
-[node name="RunAwayButton" type="Button" parent="HUD"]
+[node name="RunAwayButton" type="Button" parent="ExplorationHUD"]
 layout_mode = 0
 offset_left = 15.0
 offset_top = 64.0
@@ -118,7 +120,7 @@ offset_right = 62.0
 offset_bottom = 95.0
 text = "Fugir"
 
-[node name="DungeonLevelText" type="Label" parent="HUD"]
+[node name="DungeonLevelText" type="Label" parent="ExplorationHUD"]
 layout_mode = 0
 offset_left = 14.0
 offset_top = 32.0
@@ -126,7 +128,7 @@ offset_right = 169.0
 offset_bottom = 58.0
 text = "Nível da Dungeon: 0"
 
-[node name="DragonAwereness" type="Label" parent="HUD"]
+[node name="DragonAwereness" type="Label" parent="ExplorationHUD"]
 layout_mode = 0
 offset_left = 15.0
 offset_top = 104.0
@@ -134,14 +136,14 @@ offset_right = 163.0
 offset_bottom = 130.0
 text = "Alerta de Dragão: 0"
 
-[node name="CurrentPhase" type="Label" parent="HUD"]
+[node name="CurrentPhase" type="Label" parent="ExplorationHUD"]
 layout_mode = 0
 offset_left = 14.0
 offset_right = 154.0
 offset_bottom = 26.0
 text = "Fase do Turno: %s"
 
-[node name="GameOverDialog" parent="HUD" instance=ExtResource("7_qitpp")]
+[node name="GameOverDialog" parent="ExplorationHUD" instance=ExtResource("7_qitpp")]
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -151,7 +153,7 @@ grow_vertical = 1
 message = "Você não tem mais ações"
 ok_button = "Fugir"
 
-[connection signal="cancelled" from="HUD/NextWaveDialog" to="." method="_on_next_wave_cancelled"]
-[connection signal="confirmed" from="HUD/NextWaveDialog" to="." method="_on_next_wave_confirmed"]
-[connection signal="pressed" from="HUD/RunAwayButton" to="." method="_on_run_away"]
-[connection signal="confirmed" from="HUD/GameOverDialog" to="." method="_on_run_away"]
+[connection signal="cancelled" from="ExplorationHUD/NextWaveDialog" to="." method="_on_next_wave_cancelled"]
+[connection signal="confirmed" from="ExplorationHUD/NextWaveDialog" to="." method="_on_next_wave_confirmed"]
+[connection signal="pressed" from="ExplorationHUD/RunAwayButton" to="." method="_on_run_away"]
+[connection signal="confirmed" from="ExplorationHUD/GameOverDialog" to="." method="_on_run_away"]

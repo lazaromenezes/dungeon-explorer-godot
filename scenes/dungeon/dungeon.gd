@@ -2,9 +2,6 @@ extends Node3D
 
 signal current_phase_completed()
 
-const DUNGEON_LEVEL_LABEL: String = "Nível da Dungeon: %s"
-const DRAGON_AWARENESS_LABEL: String = "Alerta de Dragão: %d"
-const CURRENT_PHASE_LABEL: String = "Fase do Turno: %s"
 const TURN_PHASES_PATH = "res://scripts/game_logic/turn_phases"
 
 const DungeonState = preload("res://scripts/game_logic/dungeon_state.gd")
@@ -13,8 +10,6 @@ const CombatPhase = preload("%s/combat_phase.gd" % TURN_PHASES_PATH)
 const LootPhase = preload("%s/loot_phase.gd" % TURN_PHASES_PATH)
 const DragonPhase = preload("%s/dragon_phase.gd" % TURN_PHASES_PATH)
 const RegroupPhase = preload("%s/regroup_phase.gd" % TURN_PHASES_PATH)
-
-const Alert = preload("res://scenes/ui/alert/alert.tscn")
 
 @export var rollable_items: Array[RollableItem]
 
@@ -34,7 +29,7 @@ func _ready():
 
 func _initialize_state():
 	_dungeon_state = DungeonState.new(rollable_items)
-	_dungeon_state.level_changed.connect(_on_level_changed)
+	_dungeon_state.level_changed.connect($ExplorationHUD.on_level_changed)
 
 func _initialize_phases():
 	var roll_phase = RollPhase.new(_dungeon_state)
@@ -47,6 +42,7 @@ func _initialize_phases():
 	
 	for phase in _turn_order:
 		phase.started.connect(_on_phase_started)
+		phase.started.connect($ExplorationHUD.on_phase_started)
 		phase.completed.connect(_on_phase_completed)
 
 func _start_turn():
@@ -64,7 +60,7 @@ func _start_enemies():
 		enemy.stats.current_health = 0
 		enemy.selected.connect(_on_enemy_selected)
 		
-	$Dragon.alerted.connect(_on_dragon_alerted)
+	$Dragon.alerted.connect($ExplorationHUD.on_dragon_alerted)
 
 func _start_loot_items():
 	for item in $Loot.get_children():
@@ -85,11 +81,11 @@ func _on_enemy_selected(enemy: Enemy):
 		_selected_hireling.attack(enemy)
 		_finish_hireling_action()
 	else:
-		_show_alert("Escolha o aventureiro primeiro")
+		$ExplorationHUD.show_alert("Escolha o aventureiro primeiro")
 
 func _on_loot_selected(item: LootItem):
 	if not _current_phase is LootPhase:
-		_show_alert("Aguarde a fase de saque")
+		$ExplorationHUD.show_alert("Aguarde a fase de saque")
 		return
 
 	if _selected_hireling != null:
@@ -97,14 +93,14 @@ func _on_loot_selected(item: LootItem):
 		await item.resolved
 		_finish_hireling_action()
 	else:
-		_show_alert("Escolha o aventureiro primeiro")
+		$ExplorationHUD.show_alert("Escolha o aventureiro primeiro")
 
 func _on_dragon_selected(enemy: Enemy):
 	if(_selected_hireling != null):
 		_selected_hireling.attack(enemy)
 		_finish_hireling_action()
 	else:
-		_show_alert("Escolha o aventureiro primeiro")
+		$ExplorationHUD.show_alert("Escolha o aventureiro primeiro")
 
 func _finish_hireling_action():
 	_unselect_current_hireling()
@@ -125,20 +121,13 @@ func _check_remaining_moves():
 		total_hirelings += hireling.stats.current_health
 		
 	if total_hirelings == 0:
-		$HUD/GameOverDialog.show()
-
-func _on_level_changed(current_level: int):
-	$HUD/DungeonLevelText.text = DUNGEON_LEVEL_LABEL % current_level
-
-func _on_dragon_alerted(dragon_awareness: int):
-	$HUD/DragonAwereness.text = DRAGON_AWARENESS_LABEL % dragon_awareness
+		$ExplorationHUD.show_game_over()
 
 func _regroup_phase_start():
 	get_tree().call_group("hirelings_group", "rest")
-	$HUD/NextWaveDialog.show()
+	$ExplorationHUD.ask_for_next_wave()
 
-func _on_phase_started(phase_name: String):
-	$HUD/CurrentPhase.text = phase_name
+func _on_phase_started(_phase_name: String):
 	await get_tree().create_timer(0.1).timeout
 	_current_phase.check_completion()
 
@@ -156,14 +145,5 @@ func _on_next_wave_cancelled():
 func _on_run_away(): 
 	get_tree().change_scene_to_file("res://scenes/tavern/tavern.tscn")
 
-func _show_alert(message: String):
-	var alert = Alert.instantiate()
-	alert.visible = false
-	alert.message = message
-	$HUD.add_child(alert)
-	alert.show()
-	await alert.confirmed
-	alert.queue_free()
-	
 func _on_chest_resolved(looted_items):
 	print(looted_items)
