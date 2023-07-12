@@ -68,6 +68,7 @@ func _start_loot_items():
 		item.selected.connect(_on_loot_selected)
 		
 	$Loot/Chest.resolved.connect(_on_chest_resolved)
+	$Loot/Potion.resolved.connect(_on_potion_resolved)
 
 func _start_dragon():
 	$Dragon.selected.connect(_on_dragon_selected)
@@ -147,3 +148,8 @@ func _on_run_away():
 
 func _on_chest_resolved(looted_items):
 	print(looted_items)
+
+func _on_potion_resolved(selection: Dictionary):
+	for hireling in $Hirelings.get_children():
+		if hireling.stats in selection:
+			hireling.heal(selection[hireling.stats])

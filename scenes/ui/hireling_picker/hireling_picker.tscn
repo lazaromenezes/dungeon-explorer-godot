@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfpcyy83lhc56"]
+[gd_scene load_steps=9 format=3 uid="uid://bfpcyy83lhc56"]
 
 [ext_resource type="Script" path="res://scenes/ui/hireling_picker/hireling_picker.gd" id="1_lmnv2"]
 [ext_resource type="StyleBox" uid="uid://slaaldeivygs" path="res://styles/dialog_box.tres" id="2_65vx5"]
+[ext_resource type="Script" path="res://scenes/ui/hireling_picker/pick_hireling_button.gd" id="3_yy57t"]
+[ext_resource type="Resource" uid="uid://b30qbddmnj37t" path="res://scenes/characters/hirelings/champion/champion.tres" id="4_32yy1"]
+[ext_resource type="Resource" uid="uid://dl3qeysyw1g8a" path="res://scenes/characters/hirelings/cleric/cleric.tres" id="5_5mldc"]
+[ext_resource type="Resource" uid="uid://tmcnje7lorrw" path="res://scenes/characters/hirelings/fighter/fighter.tres" id="6_50mn3"]
+[ext_resource type="Resource" uid="uid://bwx0u5uuerl86" path="res://scenes/characters/hirelings/rogue/rogue.tres" id="7_f0t6s"]
+[ext_resource type="Resource" uid="uid://cnxr2d7bhdvkt" path="res://scenes/characters/hirelings/wizard/wizard.tres" id="8_4dpjl"]
 
 [node name="HirelingPicker" type="Control"]
 layout_mode = 3
@@ -48,22 +54,32 @@ alignment = 1
 [node name="Champion" type="Button" parent="PanelContainer/VBoxContainer/HirelingsContainer"]
 layout_mode = 2
 text = "CAMPEÃO"
+script = ExtResource("3_yy57t")
+hireling_stats = ExtResource("4_32yy1")
 
 [node name="Cleric" type="Button" parent="PanelContainer/VBoxContainer/HirelingsContainer"]
 layout_mode = 2
 text = "CLÉRIGO"
+script = ExtResource("3_yy57t")
+hireling_stats = ExtResource("5_5mldc")
 
 [node name="Fighter" type="Button" parent="PanelContainer/VBoxContainer/HirelingsContainer"]
 layout_mode = 2
 text = "GUERREIRO"
+script = ExtResource("3_yy57t")
+hireling_stats = ExtResource("6_50mn3")
 
 [node name="Rogue" type="Button" parent="PanelContainer/VBoxContainer/HirelingsContainer"]
 layout_mode = 2
 text = "LADINO"
+script = ExtResource("3_yy57t")
+hireling_stats = ExtResource("7_f0t6s")
 
 [node name="Wizard" type="Button" parent="PanelContainer/VBoxContainer/HirelingsContainer"]
 layout_mode = 2
 text = "MAGO"
+script = ExtResource("3_yy57t")
+hireling_stats = ExtResource("8_4dpjl")
 
 [node name="HiredAvailable" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2

@@ -55,6 +55,9 @@ func _exhaust():
 func rest():
 	stats.condition = GameConstants.Condition.READY
 
+func heal(amount: int):
+	stats.current_health += amount
+
 func _is_available():
 	return stats.current_health > 0 and stats.condition != GameConstants.Condition.EXHAUSTED
 

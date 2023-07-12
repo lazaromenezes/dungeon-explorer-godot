@@ -1,7 +1,7 @@
 extends Node3D
 class_name Tavern
 
-const MAX_HIRELINGS: int = 30
+const MAX_HIRELINGS: int = 10
 
 func _init():
 	Party.current.clear()
