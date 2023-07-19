@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dkvy2eki0h3dx"]
+[gd_scene load_steps=19 format=3 uid="uid://dkvy2eki0h3dx"]
 
 [ext_resource type="Script" path="res://scenes/dungeon/dungeon.gd" id="1_djhe0"]
 [ext_resource type="PackedScene" uid="uid://6t4nndgiiqrv" path="res://scenes/characters/hirelings/champion/champion.tscn" id="2_57tf7"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bolydffmm1fbj" path="res://scenes/ui/confirm_dialog/confirm_dialog.tscn" id="12_5w3xi"]
 [ext_resource type="PackedScene" uid="uid://dlhgghgtdi7id" path="res://scenes/characters/enemies/dragon/dragon.tscn" id="12_ykxjg"]
 [ext_resource type="Script" path="res://scenes/dungeon/hud.gd" id="13_bd57x"]
+[ext_resource type="Theme" uid="uid://2bkh2fwjvfve" path="res://themes/kenney-rpg-ui-theme/kenney-rpg-ui-theme.tres" id="13_kkhfn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d4yv6"]
 size = Vector3(5, 0.2, 5)
@@ -103,10 +104,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme = ExtResource("13_kkhfn")
 script = ExtResource("13_bd57x")
 
 [node name="NextWaveDialog" parent="ExplorationHUD" instance=ExtResource("12_5w3xi")]
-visible = false
 layout_mode = 1
 message = "Ir para o próximo nível?"
 confirm_button = "Sim"

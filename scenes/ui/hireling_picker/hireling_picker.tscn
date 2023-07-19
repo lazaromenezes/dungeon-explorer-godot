@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bfpcyy83lhc56"]
 
+[ext_resource type="Theme" uid="uid://2bkh2fwjvfve" path="res://themes/kenney-rpg-ui-theme/kenney-rpg-ui-theme.tres" id="1_k1ay8"]
 [ext_resource type="Script" path="res://scenes/ui/hireling_picker/hireling_picker.gd" id="1_lmnv2"]
-[ext_resource type="StyleBox" uid="uid://slaaldeivygs" path="res://styles/dialog_box.tres" id="2_65vx5"]
 [ext_resource type="Script" path="res://scenes/ui/hireling_picker/pick_hireling_button.gd" id="3_yy57t"]
 [ext_resource type="Resource" uid="uid://b30qbddmnj37t" path="res://scenes/characters/hirelings/champion/champion.tres" id="4_32yy1"]
 [ext_resource type="Resource" uid="uid://dl3qeysyw1g8a" path="res://scenes/characters/hirelings/cleric/cleric.tres" id="5_5mldc"]
@@ -17,6 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("1_k1ay8")
 script = ExtResource("1_lmnv2")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -32,7 +33,6 @@ offset_right = 69.5
 offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("2_65vx5")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2

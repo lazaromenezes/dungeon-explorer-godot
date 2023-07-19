@@ -11,13 +11,17 @@ config_version=5
 [application]
 
 config/name="dungeon-explorer"
-run/main_scene="res://scenes/tavern/tavern.tscn"
+run/main_scene="res://scenes/title_window/main_menu.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Party="*res://scenes/party.gd"
+
+[display]
+
+mouse_cursor/custom_image="res://themes/kenney-rpg-ui-theme/kenney-rpg-ui-pack/cursorGauntlet_blue.png"
 
 [dotnet]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://mtq3vpa15sop"]
 
-[ext_resource type="StyleBox" uid="uid://slaaldeivygs" path="res://styles/dialog_box.tres" id="1_kwpj1"]
+[ext_resource type="Theme" uid="uid://2bkh2fwjvfve" path="res://themes/kenney-rpg-ui-theme/kenney-rpg-ui-theme.tres" id="1_35gd3"]
 [ext_resource type="Script" path="res://scenes/ui/open_chest/open_chest.gd" id="1_pfwyk"]
 
 [node name="OpenChest" type="Control"]
@@ -11,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("1_35gd3")
 script = ExtResource("1_pfwyk")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -26,7 +27,6 @@ offset_right = 69.5
 offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("1_kwpj1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2

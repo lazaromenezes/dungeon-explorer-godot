@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dc5fbfhnkx6m8"]
+[gd_scene load_steps=4 format=3 uid="uid://dc5fbfhnkx6m8"]
 
 [ext_resource type="Script" path="res://scenes/title_window/new_game_controller.gd" id="1_iatvn"]
+[ext_resource type="Theme" uid="uid://2bkh2fwjvfve" path="res://themes/kenney-rpg-ui-theme/kenney-rpg-ui-theme.tres" id="1_vwgv8"]
 [ext_resource type="Script" path="res://scenes/title_window/quit_button_controller.gd" id="2_unrpa"]
 
 [node name="TitleWindow" type="Control"]
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_vwgv8")
 
 [node name="NewGameButton" type="Button" parent="."]
 layout_mode = 0

@@ -1,14 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://bolydffmm1fbj"]
 
 [ext_resource type="Script" path="res://scenes/ui/confirm_dialog/confirm_dialog.gd" id="1_licbp"]
-[ext_resource type="StyleBox" uid="uid://slaaldeivygs" path="res://styles/dialog_box.tres" id="2_ri13a"]
+[ext_resource type="Theme" uid="uid://2bkh2fwjvfve" path="res://themes/kenney-rpg-ui-theme/kenney-rpg-ui-theme.tres" id="1_lsjjj"]
 
 [node name="ConfirmDialog" type="Panel"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_lsjjj")
 script = ExtResource("1_licbp")
 
 [node name="Dialog" type="PanelContainer" parent="."]
@@ -19,7 +21,6 @@ offset_right = 607.0
 offset_bottom = 373.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("2_ri13a")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Dialog"]
 layout_mode = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0i81n3envcs1"]
+[gd_scene load_steps=10 format=3 uid="uid://b0i81n3envcs1"]
 
 [ext_resource type="Script" path="res://scenes/tavern/tavern.gd" id="1_wred3"]
 [ext_resource type="PackedScene" uid="uid://6t4nndgiiqrv" path="res://scenes/characters/hirelings/champion/champion.tscn" id="2_hptbt"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cx4gf23ugit30" path="res://scenes/characters/hirelings/fighter/fighter.tscn" id="4_76v3j"]
 [ext_resource type="PackedScene" uid="uid://dtnjygso3ouyg" path="res://scenes/characters/hirelings/rogue/rogue.tscn" id="5_rh7mw"]
 [ext_resource type="PackedScene" uid="uid://dxinsc5iluilg" path="res://scenes/characters/hirelings/wizard/wizard.tscn" id="6_dwvmy"]
+[ext_resource type="Theme" uid="uid://2bkh2fwjvfve" path="res://themes/kenney-rpg-ui-theme/kenney-rpg-ui-theme.tres" id="7_a8bs3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_skocm"]
 size = Vector3(5, 0.2, 5)
@@ -65,6 +66,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.849621, 0.865907)
 mouse_filter = 2
+theme = ExtResource("7_a8bs3")
 
 [node name="HireButton" type="Button" parent="HUD"]
 layout_mode = 0
