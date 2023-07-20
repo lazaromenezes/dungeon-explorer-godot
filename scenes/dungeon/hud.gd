@@ -5,16 +5,12 @@ const DUNGEON_LEVEL_LABEL: String = "Nível da Dungeon: %s"
 const DRAGON_AWARENESS_LABEL: String = "Alerta de Dragão: %d"
 const CURRENT_PHASE_LABEL: String = "Fase do Turno: %s"
 
-const Alert = preload("res://scenes/ui/alert/alert.tscn")
-
 func show_alert(message: String):
-	var alert = Alert.instantiate()
-	alert.visible = false
-	alert.message = message
-	add_child(alert)
-	alert.show()
-	await alert.confirmed
-	alert.queue_free()
+	$Alert.visible = false
+	$Alert.message = message
+	$Alert.show()
+	await $Alert.confirmed
+	$Alert.hide()
 
 func ask_for_next_wave():
 	$NextWaveDialog.show()

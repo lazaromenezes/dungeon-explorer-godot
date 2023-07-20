@@ -108,7 +108,17 @@ theme = ExtResource("13_kkhfn")
 script = ExtResource("13_bd57x")
 
 [node name="NextWaveDialog" parent="ExplorationHUD" instance=ExtResource("12_5w3xi")]
+visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -576.0
+offset_bottom = -324.0
 message = "Ir para o próximo nível?"
 confirm_button = "Sim"
 cancel_button = "Não"
@@ -145,14 +155,32 @@ offset_bottom = 26.0
 text = "Fase do Turno: %s"
 
 [node name="GameOverDialog" parent="ExplorationHUD" instance=ExtResource("7_qitpp")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -576.0
+offset_bottom = -324.0
 message = "Você não tem mais ações"
 ok_button = "Fugir"
+
+[node name="Alert" parent="ExplorationHUD" instance=ExtResource("7_qitpp")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -576.0
+offset_bottom = -324.0
 
 [connection signal="cancelled" from="ExplorationHUD/NextWaveDialog" to="." method="_on_next_wave_cancelled"]
 [connection signal="confirmed" from="ExplorationHUD/NextWaveDialog" to="." method="_on_next_wave_confirmed"]

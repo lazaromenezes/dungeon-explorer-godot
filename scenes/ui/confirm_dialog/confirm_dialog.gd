@@ -1,4 +1,4 @@
-extends Panel
+extends Control
 
 @export var message: String = ""
 @export var confirm_button: String = "Confirm"
