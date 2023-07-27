@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dkvy2eki0h3dx"]
+[gd_scene load_steps=19 format=3 uid="uid://dkvy2eki0h3dx"]
 
 [ext_resource type="Script" path="res://scenes/dungeon/dungeon.gd" id="1_djhe0"]
 [ext_resource type="PackedScene" uid="uid://6t4nndgiiqrv" path="res://scenes/characters/hirelings/champion/champion.tscn" id="2_57tf7"]
@@ -10,8 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://dtnjygso3ouyg" path="res://scenes/characters/hirelings/rogue/rogue.tscn" id="8_lrtie"]
 [ext_resource type="PackedScene" uid="uid://bh2bsndlebpj1" path="res://scenes/characters/enemies/skeleton/skeleton.tscn" id="9_b3n2r"]
 [ext_resource type="PackedScene" uid="uid://dxinsc5iluilg" path="res://scenes/characters/hirelings/wizard/wizard.tscn" id="10_33h4m"]
+[ext_resource type="PackedScene" uid="uid://ca0n7nb4gya7x" path="res://scenes/items/loot_item/chest/chest.tscn" id="10_814se"]
+[ext_resource type="PackedScene" uid="uid://c16ipdtlnb1tb" path="res://scenes/items/loot_item/potion/potion.tscn" id="11_y5i8w"]
 [ext_resource type="PackedScene" uid="uid://bolydffmm1fbj" path="res://scenes/ui/confirm_dialog/confirm_dialog.tscn" id="12_5w3xi"]
 [ext_resource type="PackedScene" uid="uid://dlhgghgtdi7id" path="res://scenes/characters/enemies/dragon/dragon.tscn" id="12_ykxjg"]
+[ext_resource type="Script" path="res://scenes/dungeon/hud.gd" id="13_bd57x"]
+[ext_resource type="Theme" uid="uid://2bkh2fwjvfve" path="res://themes/kenney-rpg-ui-theme/kenney-rpg-ui-theme.tres" id="13_kkhfn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d4yv6"]
 size = Vector3(5, 0.2, 5)
@@ -21,7 +25,7 @@ size = Vector3(5, 0.2, 5)
 
 [node name="Dungeon" type="Node3D" node_paths=PackedStringArray("rollable_items")]
 script = ExtResource("1_djhe0")
-rollable_items = [NodePath("Enemies/Slime"), NodePath("Enemies/Goblin"), NodePath("Enemies/Skeleton"), NodePath("Dragon")]
+rollable_items = [NodePath("Enemies/Slime"), NodePath("Enemies/Goblin"), NodePath("Enemies/Skeleton"), NodePath("Dragon"), NodePath("Loot/Chest"), NodePath("Loot/Potion")]
 
 [node name="Scenario" type="Node" parent="."]
 
@@ -78,11 +82,21 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.426007, 0, -1.10088)
 visible = false
 
+[node name="Loot" type="Node" parent="."]
+
+[node name="Chest" parent="Loot" instance=ExtResource("10_814se")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.183733, 0, -1.44397)
+visible = false
+
+[node name="Potion" parent="Loot" instance=ExtResource("11_y5i8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -1.415)
+visible = false
+
 [node name="Dragon" parent="." instance=ExtResource("12_ykxjg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1544, -0.773635)
 visible = false
 
-[node name="HUD" type="Control" parent="."]
+[node name="ExplorationHUD" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -90,56 +104,107 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme = ExtResource("13_kkhfn")
+script = ExtResource("13_bd57x")
 
-[node name="NextWaveDialog" parent="HUD" instance=ExtResource("12_5w3xi")]
+[node name="NextWaveDialog" parent="ExplorationHUD" instance=ExtResource("12_5w3xi")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -576.0
+offset_bottom = -324.0
 message = "Ir para o próximo nível?"
 confirm_button = "Sim"
 cancel_button = "Não"
 
-[node name="RunAwayButton" type="Button" parent="HUD"]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 64.0
-offset_right = 62.0
-offset_bottom = 95.0
-text = "Fugir"
-
-[node name="DungeonLevelText" type="Label" parent="HUD"]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 32.0
-offset_right = 169.0
-offset_bottom = 58.0
-text = "Nível da Dungeon: 0"
-
-[node name="DragonAwereness" type="Label" parent="HUD"]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 104.0
-offset_right = 163.0
-offset_bottom = 130.0
-text = "Alerta de Dragão: 0"
-
-[node name="CurrentPhase" type="Label" parent="HUD"]
-layout_mode = 0
-offset_left = 14.0
-offset_right = 154.0
-offset_bottom = 26.0
-text = "Fase do Turno: %s"
-
-[node name="GameOverDialog" parent="HUD" instance=ExtResource("7_qitpp")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
+[node name="GameOverDialog" parent="ExplorationHUD" instance=ExtResource("7_qitpp")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -576.0
+offset_bottom = -324.0
 message = "Você não tem mais ações"
 ok_button = "Fugir"
 
-[connection signal="cancelled" from="HUD/NextWaveDialog" to="." method="_on_next_wave_cancelled"]
-[connection signal="confirmed" from="HUD/NextWaveDialog" to="." method="_on_next_wave_confirmed"]
-[connection signal="pressed" from="HUD/RunAwayButton" to="." method="_on_run_away"]
-[connection signal="confirmed" from="HUD/GameOverDialog" to="." method="_on_run_away"]
+[node name="Alert" parent="ExplorationHUD" instance=ExtResource("7_qitpp")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -576.0
+offset_bottom = -324.0
+
+[node name="Footer" type="PanelContainer" parent="ExplorationHUD"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="BottomPanel" type="HBoxContainer" parent="ExplorationHUD/Footer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="ExplorationHUD/Footer/BottomPanel"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Inventário"
+
+[node name="Header" type="PanelContainer" parent="ExplorationHUD"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 75.0
+grow_horizontal = 2
+
+[node name="TopPanel" type="HBoxContainer" parent="ExplorationHUD/Header"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="CurrentPhase" type="Label" parent="ExplorationHUD/Header/TopPanel"]
+layout_mode = 2
+text = "Fase do Turno: %s"
+
+[node name="DungeonLevelText" type="Label" parent="ExplorationHUD/Header/TopPanel"]
+layout_mode = 2
+text = "Nível da Dungeon: 0"
+
+[node name="DragonAwereness" type="Label" parent="ExplorationHUD/Header/TopPanel"]
+layout_mode = 2
+text = "Alerta de Dragão: 0"
+
+[node name="RunAwayButton" type="Button" parent="ExplorationHUD/Header/TopPanel"]
+layout_mode = 2
+text = "Fugir"
+
+[connection signal="cancelled" from="ExplorationHUD/NextWaveDialog" to="." method="_on_next_wave_cancelled"]
+[connection signal="confirmed" from="ExplorationHUD/NextWaveDialog" to="." method="_on_next_wave_confirmed"]
+[connection signal="confirmed" from="ExplorationHUD/GameOverDialog" to="." method="_on_run_away"]
+[connection signal="pressed" from="ExplorationHUD/Header/TopPanel/RunAwayButton" to="." method="_on_run_away"]

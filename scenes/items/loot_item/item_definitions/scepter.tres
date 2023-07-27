@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=4 format=3 uid="uid://b20rqd2vyfgr1"]
+
+[ext_resource type="Script" path="res://scenes/items/loot_item/item_definitions/item_definition.gd" id="1_djobl"]
+[ext_resource type="Texture2D" uid="uid://c4sim23wf5ixx" path="res://assets/loot_icons.png" id="1_suw8p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofg4j"]
+atlas = ExtResource("1_suw8p")
+region = Rect2(1, 315, 145, 145)
+
+[resource]
+script = ExtResource("1_djobl")
+name = "Cetro"
+description = "Use como um mago"
+icon = SubResource("AtlasTexture_ofg4j")
+points = 1

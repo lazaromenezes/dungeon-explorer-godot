@@ -1,7 +1,7 @@
 extends RefCounted
 class_name RegroupPhase
 
-const NAME: String = "Fase de Reagrupar"
+const NAME: String = "Reagrupar"
 
 signal completed()
 signal started(name: String)

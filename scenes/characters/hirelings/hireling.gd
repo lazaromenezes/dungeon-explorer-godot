@@ -38,6 +38,14 @@ func attack(enemy: Enemy):
 	
 	_take_damage()
 
+func use(item: LootItem):
+	if item.properties in stats.preferred_items:
+		item.use_all()
+	else:
+		item.use()
+	
+	_take_damage()
+
 func _take_damage():
 	stats.current_health -= 1
 
@@ -46,6 +54,9 @@ func _exhaust():
 
 func rest():
 	stats.condition = GameConstants.Condition.READY
+
+func heal(amount: int):
+	stats.current_health += amount
 
 func _is_available():
 	return stats.current_health > 0 and stats.condition != GameConstants.Condition.EXHAUSTED

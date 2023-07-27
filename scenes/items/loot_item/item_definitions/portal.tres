@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=4 format=3 uid="uid://b6h45uv0nlxhh"]
+
+[ext_resource type="Texture2D" uid="uid://c4sim23wf5ixx" path="res://assets/loot_icons.png" id="1_ec3ee"]
+[ext_resource type="Script" path="res://scenes/items/loot_item/item_definitions/item_definition.gd" id="1_wg4us"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pquxk"]
+atlas = ExtResource("1_ec3ee")
+region = Rect2(168, 616, 144, 146)
+
+[resource]
+script = ExtResource("1_wg4us")
+name = "Portal da Cidade"
+description = "Use esse portal para voltar para a cidade sem perder pontos"
+icon = SubResource("AtlasTexture_pquxk")
+points = 2

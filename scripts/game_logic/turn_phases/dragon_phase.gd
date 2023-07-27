@@ -1,7 +1,7 @@
 extends RefCounted
 class_name DragonPhase
 
-const NAME: String = "Fase do Dragão"
+const NAME: String = "Combate com Dragão"
 	
 signal completed
 signal started(name: String)

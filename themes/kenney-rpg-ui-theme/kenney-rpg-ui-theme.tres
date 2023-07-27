@@ -1,0 +1,38 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://2bkh2fwjvfve"]
+
+[ext_resource type="StyleBox" uid="uid://cotk3wqoaq3dc" path="res://themes/kenney-rpg-ui-theme/styles/default/button-disabled.tres" id="1_jorml"]
+[ext_resource type="Texture2D" uid="uid://bw1oo6gy42mc" path="res://themes/kenney-rpg-ui-theme/kenney-rpg-ui-pack/uipack_rpg_vector.svg" id="3_ckk50"]
+[ext_resource type="StyleBox" uid="uid://bamqgf74mqi6c" path="res://themes/kenney-rpg-ui-theme/styles/default/button-hover.tres" id="3_rk3i1"]
+[ext_resource type="StyleBox" uid="uid://cj3moon5o6h2b" path="res://themes/kenney-rpg-ui-theme/styles/default/button-normal.tres" id="4_qu3ae"]
+[ext_resource type="FontFile" uid="uid://tr7da2lpyfa0" path="res://themes/kenney-rpg-ui-theme/medieval-sharp-font/MedievalSharp-Regular.ttf" id="4_s16xh"]
+[ext_resource type="StyleBox" uid="uid://b52v6jb403ftv" path="res://themes/kenney-rpg-ui-theme/styles/default/button-pressed.tres" id="5_0hws1"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_us764"]
+texture = ExtResource("3_ckk50")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(4, 502, 92, 94)
+modulate_color = Color(1, 1, 1, 0.439216)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_alsfw"]
+texture = ExtResource("3_ckk50")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(0, 280, 100, 100)
+
+[resource]
+default_font = ExtResource("4_s16xh")
+Button/colors/font_color = Color(0.231373, 0.203922, 0.176471, 1)
+Button/colors/font_focus_color = Color(0.231373, 0.203922, 0.176471, 1)
+Button/colors/font_hover_color = Color(0.658824, 0.294118, 0.0627451, 1)
+Button/styles/disabled = ExtResource("1_jorml")
+Button/styles/focus = null
+Button/styles/hover = ExtResource("3_rk3i1")
+Button/styles/normal = ExtResource("4_qu3ae")
+Button/styles/pressed = ExtResource("5_0hws1")
+Panel/styles/panel = SubResource("StyleBoxTexture_us764")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_alsfw")

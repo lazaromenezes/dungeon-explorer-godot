@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=4 format=3 uid="uid://c8fn5mxasgg33"]
+
+[ext_resource type="Script" path="res://scenes/items/loot_item/item_definitions/item_definition.gd" id="1_2kesk"]
+[ext_resource type="Texture2D" uid="uid://c4sim23wf5ixx" path="res://assets/loot_icons.png" id="1_3ivk0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1x2v0"]
+atlas = ExtResource("1_3ivk0")
+region = Rect2(169, 466, 144, 145)
+
+[resource]
+script = ExtResource("1_2kesk")
+name = "Isca de Dragão"
+description = "Use para aumentar o nível de alerta do dragão, espantando todos os monstros"
+icon = SubResource("AtlasTexture_1x2v0")
+points = 1

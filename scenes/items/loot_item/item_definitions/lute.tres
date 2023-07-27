@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=4 format=3 uid="uid://dy8ljoil8tsbt"]
+
+[ext_resource type="Texture2D" uid="uid://c4sim23wf5ixx" path="res://assets/loot_icons.png" id="1_biofy"]
+[ext_resource type="Script" path="res://scenes/items/loot_item/item_definitions/item_definition.gd" id="1_vl8hd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqxn1"]
+atlas = ExtResource("1_biofy")
+region = Rect2(8, 619, 144, 144)
+
+[resource]
+script = ExtResource("1_vl8hd")
+name = "Alaúde"
+description = "Use como um bardo"
+icon = SubResource("AtlasTexture_kqxn1")
+points = 1

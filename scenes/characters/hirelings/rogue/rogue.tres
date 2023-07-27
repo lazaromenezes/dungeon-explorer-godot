@@ -1,10 +1,14 @@
-[gd_resource type="Resource" script_class="HirelingStats" load_steps=2 format=3 uid="uid://bwx0u5uuerl86"]
+[gd_resource type="Resource" script_class="HirelingStats" load_steps=4 format=3 uid="uid://bwx0u5uuerl86"]
 
 [ext_resource type="Script" path="res://scenes/characters/hirelings/hireling_stats.gd" id="1_tqenb"]
+[ext_resource type="Resource" uid="uid://8jaedl43iwgb" path="res://scenes/items/loot_item/potion/potion.tres" id="1_ut1mr"]
+[ext_resource type="Resource" uid="uid://q4e8yecggj6r" path="res://scenes/items/loot_item/chest/chest.tres" id="2_hx2ti"]
 
 [resource]
 script = ExtResource("1_tqenb")
 preferred_enemies = Array[Resource("res://scenes/characters/enemies/enemy_stats.gd")]([])
+preferred_items = Array[Resource("res://scenes/items/loot_item/loot_item_properties.gd")]([ExtResource("1_ut1mr"), ExtResource("2_hx2ti")])
 current_health = 0
 max_health = 0
 character_class = 4
+condition = 0

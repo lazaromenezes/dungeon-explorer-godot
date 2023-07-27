@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0i81n3envcs1"]
+[gd_scene load_steps=10 format=3 uid="uid://b0i81n3envcs1"]
 
 [ext_resource type="Script" path="res://scenes/tavern/tavern.gd" id="1_wred3"]
 [ext_resource type="PackedScene" uid="uid://6t4nndgiiqrv" path="res://scenes/characters/hirelings/champion/champion.tscn" id="2_hptbt"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cx4gf23ugit30" path="res://scenes/characters/hirelings/fighter/fighter.tscn" id="4_76v3j"]
 [ext_resource type="PackedScene" uid="uid://dtnjygso3ouyg" path="res://scenes/characters/hirelings/rogue/rogue.tscn" id="5_rh7mw"]
 [ext_resource type="PackedScene" uid="uid://dxinsc5iluilg" path="res://scenes/characters/hirelings/wizard/wizard.tscn" id="6_dwvmy"]
+[ext_resource type="Theme" uid="uid://2bkh2fwjvfve" path="res://themes/kenney-rpg-ui-theme/kenney-rpg-ui-theme.tres" id="7_a8bs3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_skocm"]
 size = Vector3(5, 0.2, 5)
@@ -63,29 +64,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.849621, 0.865907)
 mouse_filter = 2
+theme = ExtResource("7_a8bs3")
 
-[node name="HireButton" type="Button" parent="HUD"]
-layout_mode = 0
-offset_left = 15.3009
-offset_top = 10.3937
-offset_right = 99.3009
-offset_bottom = 41.3937
+[node name="Header" type="PanelContainer" parent="HUD"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 69.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Header"]
+layout_mode = 2
+
+[node name="HireButton" type="Button" parent="HUD/Header/HBoxContainer"]
+layout_mode = 2
 text = "Contratar"
 
-[node name="BackButton" type="Button" parent="HUD"]
-layout_mode = 0
-offset_left = 267.178
-offset_top = 9.23887
-offset_right = 322.178
-offset_bottom = 40.2389
+[node name="BackButton" type="Button" parent="HUD/Header/HBoxContainer"]
+layout_mode = 2
 text = "Voltar"
 
-[node name="GoButton" type="Button" parent="HUD"]
-layout_mode = 0
-offset_left = 104.753
-offset_top = 10.3937
-offset_right = 259.753
-offset_bottom = 41.3937
+[node name="GoButton" type="Button" parent="HUD/Header/HBoxContainer"]
+layout_mode = 2
 text = "Entrar na Dungeon"
