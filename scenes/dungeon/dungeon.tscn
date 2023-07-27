@@ -123,37 +123,6 @@ message = "Ir para o próximo nível?"
 confirm_button = "Sim"
 cancel_button = "Não"
 
-[node name="RunAwayButton" type="Button" parent="ExplorationHUD"]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 64.0
-offset_right = 62.0
-offset_bottom = 95.0
-text = "Fugir"
-
-[node name="DungeonLevelText" type="Label" parent="ExplorationHUD"]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 32.0
-offset_right = 169.0
-offset_bottom = 58.0
-text = "Nível da Dungeon: 0"
-
-[node name="DragonAwereness" type="Label" parent="ExplorationHUD"]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 104.0
-offset_right = 163.0
-offset_bottom = 130.0
-text = "Alerta de Dragão: 0"
-
-[node name="CurrentPhase" type="Label" parent="ExplorationHUD"]
-layout_mode = 0
-offset_left = 14.0
-offset_right = 154.0
-offset_bottom = 26.0
-text = "Fase do Turno: %s"
-
 [node name="GameOverDialog" parent="ExplorationHUD" instance=ExtResource("7_qitpp")]
 visible = false
 layout_mode = 1
@@ -182,7 +151,60 @@ offset_top = -324.0
 offset_right = -576.0
 offset_bottom = -324.0
 
+[node name="Footer" type="PanelContainer" parent="ExplorationHUD"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="BottomPanel" type="HBoxContainer" parent="ExplorationHUD/Footer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="ExplorationHUD/Footer/BottomPanel"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Inventário"
+
+[node name="Header" type="PanelContainer" parent="ExplorationHUD"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 75.0
+grow_horizontal = 2
+
+[node name="TopPanel" type="HBoxContainer" parent="ExplorationHUD/Header"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="CurrentPhase" type="Label" parent="ExplorationHUD/Header/TopPanel"]
+layout_mode = 2
+text = "Fase do Turno: %s"
+
+[node name="DungeonLevelText" type="Label" parent="ExplorationHUD/Header/TopPanel"]
+layout_mode = 2
+text = "Nível da Dungeon: 0"
+
+[node name="DragonAwereness" type="Label" parent="ExplorationHUD/Header/TopPanel"]
+layout_mode = 2
+text = "Alerta de Dragão: 0"
+
+[node name="RunAwayButton" type="Button" parent="ExplorationHUD/Header/TopPanel"]
+layout_mode = 2
+text = "Fugir"
+
 [connection signal="cancelled" from="ExplorationHUD/NextWaveDialog" to="." method="_on_next_wave_cancelled"]
 [connection signal="confirmed" from="ExplorationHUD/NextWaveDialog" to="." method="_on_next_wave_confirmed"]
-[connection signal="pressed" from="ExplorationHUD/RunAwayButton" to="." method="_on_run_away"]
 [connection signal="confirmed" from="ExplorationHUD/GameOverDialog" to="." method="_on_run_away"]
+[connection signal="pressed" from="ExplorationHUD/Header/TopPanel/RunAwayButton" to="." method="_on_run_away"]

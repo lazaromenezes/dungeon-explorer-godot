@@ -1,12 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://ca0n7nb4gya7x"]
+[gd_scene load_steps=15 format=3 uid="uid://ca0n7nb4gya7x"]
 
 [ext_resource type="PackedScene" uid="uid://bfcn1333vxv3p" path="res://scenes/items/loot_item/loot_item.tscn" id="1_0bhr3"]
 [ext_resource type="Resource" uid="uid://q4e8yecggj6r" path="res://scenes/items/loot_item/chest/chest.tres" id="2_ffrga"]
 [ext_resource type="Material" uid="uid://ciar62gxvpv8r" path="res://materials/basic/pink.tres" id="2_t3hjh"]
 [ext_resource type="Script" path="res://scenes/items/loot_item/chest/chest.gd" id="2_veemy"]
+[ext_resource type="Resource" uid="uid://d2udwo13mpvtw" path="res://scenes/items/loot_item/item_definitions/vorpal_sword.tres" id="3_aestm"]
+[ext_resource type="Resource" uid="uid://c8fn5mxasgg33" path="res://scenes/items/loot_item/item_definitions/bait.tres" id="3_mp8kd"]
+[ext_resource type="Resource" uid="uid://bbbp5rytm0m83" path="res://scenes/items/loot_item/item_definitions/talisman.tres" id="4_nqbfc"]
+[ext_resource type="Resource" uid="uid://c8ioefi34j1xv" path="res://scenes/items/loot_item/item_definitions/dragon_scale.tres" id="4_uwqb7"]
+[ext_resource type="Resource" uid="uid://dy8ljoil8tsbt" path="res://scenes/items/loot_item/item_definitions/lute.tres" id="5_1naf6"]
+[ext_resource type="Resource" uid="uid://b6h45uv0nlxhh" path="res://scenes/items/loot_item/item_definitions/portal.tres" id="6_2byfr"]
+[ext_resource type="Resource" uid="uid://clj0cgddx1kb" path="res://scenes/items/loot_item/item_definitions/potion.tres" id="7_fa4nw"]
+[ext_resource type="Resource" uid="uid://1h1k76qi43hv" path="res://scenes/items/loot_item/item_definitions/ring.tres" id="8_giy88"]
+[ext_resource type="Resource" uid="uid://b20rqd2vyfgr1" path="res://scenes/items/loot_item/item_definitions/scepter.tres" id="9_6o253"]
+[ext_resource type="Resource" uid="uid://dkiqg76p2jou5" path="res://scenes/items/loot_item/item_definitions/thief_tools.tres" id="11_f76xp"]
 
 [node name="Chest" instance=ExtResource("1_0bhr3")]
 script = ExtResource("2_veemy")
+available_items = Array[Resource("res://scenes/items/loot_item/item_definitions/item_definition.gd")]([ExtResource("3_mp8kd"), ExtResource("4_uwqb7"), ExtResource("5_1naf6"), ExtResource("6_2byfr"), ExtResource("7_fa4nw"), ExtResource("8_giy88"), ExtResource("9_6o253"), ExtResource("4_nqbfc"), ExtResource("11_f76xp"), ExtResource("3_aestm")])
 properties = ExtResource("2_ffrga")
 
 [node name="MeshInstance3D" parent="StaticBody3D" index="1"]

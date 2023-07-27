@@ -135,19 +135,20 @@ func _on_phase_started(_phase_name: String):
 func _on_phase_completed():
 	current_phase_completed.emit()
 
-func _on_next_wave_confirmed():
+func _on_next_wave_confirmed(): # next wave
 	_current_phase.complete()
 	_start_turn()
 
-func _on_next_wave_cancelled():
+func _on_next_wave_cancelled(): # wave canceled
 	_current_phase.complete()
 	_on_run_away()
 
-func _on_run_away(): 
+func _on_run_away(): # game over
 	get_tree().change_scene_to_file("res://scenes/tavern/tavern.tscn")
 
 func _on_chest_resolved(looted_items):
-	print(looted_items)
+	for item in looted_items:
+		$ExplorationHUD.add_to_inventory(item)
 
 func _on_potion_resolved(selection: Dictionary):
 	for hireling in $Hirelings.get_children():

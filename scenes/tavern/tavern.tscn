@@ -64,30 +64,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.849621, 0.865907)
 mouse_filter = 2
 theme = ExtResource("7_a8bs3")
 
-[node name="HireButton" type="Button" parent="HUD"]
-layout_mode = 0
-offset_left = 15.3009
-offset_top = 10.3937
-offset_right = 99.3009
-offset_bottom = 41.3937
+[node name="Header" type="PanelContainer" parent="HUD"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 69.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Header"]
+layout_mode = 2
+
+[node name="HireButton" type="Button" parent="HUD/Header/HBoxContainer"]
+layout_mode = 2
 text = "Contratar"
 
-[node name="BackButton" type="Button" parent="HUD"]
-layout_mode = 0
-offset_left = 267.178
-offset_top = 9.23887
-offset_right = 322.178
-offset_bottom = 40.2389
+[node name="BackButton" type="Button" parent="HUD/Header/HBoxContainer"]
+layout_mode = 2
 text = "Voltar"
 
-[node name="GoButton" type="Button" parent="HUD"]
-layout_mode = 0
-offset_left = 104.753
-offset_top = 10.3937
-offset_right = 259.753
-offset_bottom = 41.3937
+[node name="GoButton" type="Button" parent="HUD/Header/HBoxContainer"]
+layout_mode = 2
 text = "Entrar na Dungeon"

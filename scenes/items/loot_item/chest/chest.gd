@@ -1,6 +1,8 @@
 extends LootItem
 class_name Chest
 
+@export var available_items: Array[ItemDefinition]
+
 const OpenChest = preload("res://scenes/ui/open_chest/open_chest.tscn")
 
 func _ready():
@@ -13,15 +15,15 @@ func _on_used(amount: int):
 	resolved.emit(looted_items)
 
 func _draw_loot(amount: int):
-	var looted_items = Array()
+	var looted_items: Array[ItemDefinition] = []
 	
 	for item in amount:
-		var looted_item = GameConstants.Item.keys().pick_random()
+		var looted_item = self.available_items.pick_random()
 		looted_items.append(looted_item)
 	
 	return looted_items
 
-func _show_loot(looted_items):
+func _show_loot(looted_items: Array[ItemDefinition]):
 	var open_chest = OpenChest.instantiate()
 	get_tree().root.add_child(open_chest)
 	open_chest.show_loot(looted_items)

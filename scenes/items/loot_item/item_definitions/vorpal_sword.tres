@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=4 format=3 uid="uid://d2udwo13mpvtw"]
+
+[ext_resource type="Texture2D" uid="uid://c4sim23wf5ixx" path="res://assets/loot_icons.png" id="1_ikpuu"]
+[ext_resource type="Script" path="res://scenes/items/loot_item/item_definitions/item_definition.gd" id="1_w807s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuda8"]
+atlas = ExtResource("1_ikpuu")
+region = Rect2(0, 1, 145, 145)
+
+[resource]
+script = ExtResource("1_w807s")
+name = "Vorpal Sword"
+description = "Use para adicionar um guerreiro"
+icon = SubResource("AtlasTexture_nuda8")
+points = 1
