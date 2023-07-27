@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="dungeon-explorer"
-run/main_scene="res://scenes/tavern/tavern.tscn"
+run/main_scene="res://scenes/title_window/main_menu.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
@@ -41,3 +41,4 @@ select_item={
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
