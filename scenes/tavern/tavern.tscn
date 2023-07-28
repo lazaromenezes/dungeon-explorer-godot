@@ -43,19 +43,19 @@ far = 1000.0
 [node name="Hirelings" type="Node" parent="."]
 
 [node name="Champion" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("2_hptbt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27439, -2.38419e-07, -0.837619)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.245889, -2.38419e-07, -0.837619)
 
 [node name="Cleric" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("3_6ee7t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.315, 0, -1.00729)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.370385, 0, -0.889521)
 
 [node name="Fighter" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("4_76v3j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.058574, 0, 1.12377)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.058574, 0, 0.284942)
 
 [node name="Rogue" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("5_rh7mw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.693103, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.581733, 0, 0)
 
 [node name="Wizard" parent="Hirelings" groups=["hirelings_group"] instance=ExtResource("6_dwvmy")]
-transform = Transform3D(1, 0, 0.000959931, 0, 1, 0, -0.000959931, 0, 1, -0.478108, 0, 0)
+transform = Transform3D(1, 0, 0.000959931, 0, 1, 0, -0.000959931, 0, 1, -0.543527, 0, 0)
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
