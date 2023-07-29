@@ -21,8 +21,9 @@ Party="*res://scenes/party.gd"
 
 [display]
 
-window/size/viewport_width=432
-window/size/viewport_height=960
+window/size/viewport_width=720
+window/size/viewport_height=1080
+window/size/mode=2
 window/stretch/mode="viewport"
 window/handheld/orientation=1
 mouse_cursor/custom_image="res://themes/kenney-rpg-ui-theme/kenney-rpg-ui-pack/cursorGauntlet_blue.png"
