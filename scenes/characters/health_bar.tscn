@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/characters/health_bar.gd" id="1_twjpf"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_lqmni"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_s8nnr"]
 viewport_path = NodePath("SubViewport")
 
 [node name="HealthBar" type="Node3D"]
@@ -12,19 +12,16 @@ script = ExtResource("1_twjpf")
 transparent_bg = true
 handle_input_locally = false
 debug_draw = 1
-size = Vector2i(120, 32)
-size_2d_override = Vector2i(120, 32)
+size = Vector2i(100, 100)
 
-[node name="Label" type="Label" parent="SubViewport"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 12
-vertical_alignment = 1
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport"]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/separation = 5
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 cast_shadow = 0
 billboard = 1
-texture = SubResource("ViewportTexture_lqmni")
+texture = SubResource("ViewportTexture_s8nnr")

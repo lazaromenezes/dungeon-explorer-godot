@@ -1,12 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://cihy5qq3wcdde"]
+[gd_scene load_steps=7 format=3 uid="uid://cihy5qq3wcdde"]
 
 [ext_resource type="Script" path="res://scenes/characters/enemies/enemy.gd" id="1_rg6bn"]
 [ext_resource type="PackedScene" uid="uid://c2svt75w3mah6" path="res://scenes/characters/health_bar.tscn" id="2_6sw5v"]
+[ext_resource type="Texture2D" uid="uid://ci04xly24sfu6" path="res://assets/3rdParty/iconsDouble.png" id="3_ws6vl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g6atx"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_r4djc"]
 size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lebc8"]
+atlas = ExtResource("3_ws6vl")
+region = Rect2(1032, 128, 112, 120)
 
 [node name="EnemyBase" type="Node3D"]
 script = ExtResource("1_rg6bn")
@@ -21,5 +26,6 @@ shape = SubResource("BoxShape3D_g6atx")
 mesh = SubResource("PrismMesh_r4djc")
 
 [node name="HealthBar" parent="." instance=ExtResource("2_6sw5v")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.2, 0)
-symbol = "☠"
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.2, 0)
+texture = SubResource("AtlasTexture_lebc8")
+modulate = Color(0.384314, 0.384314, 0.384314, 1)

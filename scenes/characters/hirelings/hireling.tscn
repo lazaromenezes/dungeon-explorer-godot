@@ -1,14 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyh1885hcqv6p"]
+[gd_scene load_steps=9 format=3 uid="uid://cyh1885hcqv6p"]
 
 [ext_resource type="Script" path="res://scenes/characters/hirelings/hireling.gd" id="1_2egp0"]
 [ext_resource type="PackedScene" uid="uid://c2svt75w3mah6" path="res://scenes/characters/health_bar.tscn" id="2_xuy6m"]
 [ext_resource type="PlaneMesh" uid="uid://dwkvxl58ewgm2" path="res://scenes/characters/hirelings/hireling_selected_mesh.tres" id="3_7uw4b"]
+[ext_resource type="Texture2D" uid="uid://ci04xly24sfu6" path="res://assets/3rdParty/iconsDouble.png" id="3_pwj3n"]
 [ext_resource type="PlaneMesh" uid="uid://dne0fhj0qndwh" path="res://scenes/characters/hirelings/hireling_exhausted_mesh.tres" id="4_ur6mk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g6atx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_oxgiq"]
 size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wf2hu"]
+atlas = ExtResource("3_pwj3n")
+region = Rect2(1678, 147, 100, 81)
 
 [node name="HirelingBase" type="Node3D"]
 script = ExtResource("1_2egp0")
@@ -23,8 +28,9 @@ shape = SubResource("BoxShape3D_g6atx")
 mesh = SubResource("BoxMesh_oxgiq")
 
 [node name="HealthBar" parent="." instance=ExtResource("2_xuy6m")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.2, 0)
-symbol = "❤"
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.2, 0)
+texture = SubResource("AtlasTexture_wf2hu")
+modulate = Color(0.592157, 0, 0.0392157, 1)
 
 [node name="SelectedIndicator" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, -0.09, 0)
