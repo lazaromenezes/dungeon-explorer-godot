@@ -1,14 +1,23 @@
 extends Node
 class_name HealthBar
 
-@export var symbol: String = ""
+@export var texture: AtlasTexture
+@export_color_no_alpha var modulate
+@onready var _separation: int = $SubViewport/HBoxContainer.get_theme_constant("separation")
 
 func _ready():
-	$Sprite3D.texture = $SubViewport.get_texture()
+	if modulate != null:
+		$Sprite3D.modulate = modulate
 
 func set_progress_bar(current: int):
-	$SubViewport/Label.text = ""
+	for image in $SubViewport/HBoxContainer.get_children():
+		image.queue_free()
 	
-	for i in range(current):
-		$SubViewport/Label.text += symbol
+	for i in current:
+		var image = TextureRect.new()
+		image.texture = texture
+		$SubViewport/HBoxContainer.add_child(image)
 	
+	var width = texture.region.size.x
+	
+	$SubViewport.size.x = current * (width + _separation)
