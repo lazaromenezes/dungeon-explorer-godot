@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="ItemDefinition" load_steps=4 format=3 uid="uid://1h1k76qi43hv"]
 
+[ext_resource type="Texture2D" uid="uid://c3gj5estrjigr" path="res://assets/assets-dunegon-explorer/tilesheet.svg" id="1_1nylo"]
 [ext_resource type="Script" path="res://scenes/items/loot_item/item_definitions/item_definition.gd" id="1_77xxj"]
-[ext_resource type="Texture2D" uid="uid://c4sim23wf5ixx" path="res://assets/loot_icons.png" id="1_d81w3"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4vwjk"]
-atlas = ExtResource("1_d81w3")
-region = Rect2(177, 0, 144, 145)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ar0ve"]
+atlas = ExtResource("1_1nylo")
+region = Rect2(19, 166, 128, 128)
 
 [resource]
 script = ExtResource("1_77xxj")
 name = "Anel de Invisibilidade"
 description = "Use para sumir e diminuir o nível de alerta do dragão"
-icon = SubResource("AtlasTexture_4vwjk")
+icon = SubResource("AtlasTexture_ar0ve")
 points = 1

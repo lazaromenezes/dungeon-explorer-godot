@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="ItemDefinition" load_steps=4 format=3 uid="uid://dkiqg76p2jou5"]
 
 [ext_resource type="Script" path="res://scenes/items/loot_item/item_definitions/item_definition.gd" id="1_3n51w"]
-[ext_resource type="Texture2D" uid="uid://c4sim23wf5ixx" path="res://assets/loot_icons.png" id="1_ompm5"]
+[ext_resource type="Texture2D" uid="uid://c3gj5estrjigr" path="res://assets/assets-dunegon-explorer/tilesheet.svg" id="1_mr44f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jyla7"]
-atlas = ExtResource("1_ompm5")
-region = Rect2(6, 466, 146, 146)
+atlas = ExtResource("1_mr44f")
+region = Rect2(165, 166, 129, 128)
 
 [resource]
 script = ExtResource("1_3n51w")
